@@ -1,0 +1,50 @@
+baseURL = "https://li-dong-chao.github.io"
+title = "LiDongchao"
+theme = "yinyang"
+LanguageCode = "zh-CN"
+DefaultContentLanguage = "cn"
+enableRobotsTXT = true
+canonifyURLs = false
+enableEmoji = true
+
+googleAnalytics = "G-BB1PN11EPH"
+
+[permalinks]
+post = "/:year/:month/:title/"
+
+[params]
+headTitle = "LiDongchao"
+description = "Keep the passion."
+favicon = "/favicon.svg"
+mainSections = ["posts"]
+lazyImage = true
+
+[[params.headerTags]]
+name = "Home"
+link = "/"
+
+[[params.headerTags]]
+name = "About"
+link = "/about"
+
+[[params.author]]
+name = "LiDongchao"
+homepage = "/about"
+
+
+
+[markup]
+[markup.highlight]
+guessSyntax = true
+lineNoStart = 1
+lineNos = true
+lineNumbersInTable = false
+noClasses = true
+style = "xcode-dark"
+tabWidth = 4
+
+
+[taxonomies]
+tag = "tags"
+category = "categories"
+series = "series"

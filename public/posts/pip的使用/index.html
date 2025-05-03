@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.147.1">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="" />
+  <meta property="og:url" content="https://li-dong-chao.github.io/posts/pip%E7%9A%84%E4%BD%BF%E7%94%A8/" />
+  <link rel="canonical" href="https://li-dong-chao.github.io/posts/pip%E7%9A%84%E4%BD%BF%E7%94%A8/" /><link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.svg" />
+  <link rel="shortcut" href="/favicon.svg" /><link rel="alternate" type="application/atom+xml" href="https://li-dong-chao.github.io/index.xml" title="LiDongchao">
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/li-dong-chao.github.io\/"
+      },
+      "articleSection" : "posts",
+      "name" : "pip",
+      "headline" : "pip",
+      "description" : "pip是 Python的包安装工具， 用户可以使用该工具安装 pypi（Python包索引） 或 其他源（如 清华源）上的包。\n从本质上来说，pip其实就是一个Python的一个包，只不过这个包可以用来管理Python的其他包， 它支持从不同的包索引源安装指定版本的包，即pip支持Python包的版本控制。\n此外，pip还是一个命令行程序，在安装完pip后，会在系统中添加上pip命令， 此时可以直接在终端执行pip命令进行包的安装与管理等。\n安装 自动安装 一般情况下，当用户使用以下两种方式之一配置Python环境时，pip会自动安装好。\n用户使用 虚拟环境； 用户使用从 Python官网 下载的Python； pip官网 还提到了一种情况（ using Python that has not been modified by a redistributor to remove ensurepip），本人不太熟悉，暂时没有列到这里。\n手动安装 如果你的环境中没有pip，可以使用以下两种方式进行安装。\nensurepip get-pip.py ensurepip ensurepip 是Python的一个内置模块，可以用来安装pip，只需执行以下命令即可。\n1python -m ensurepip --upgrade get-pip.py get-pip.py 是官方提供的一个Python脚本，它使用一些引即可导逻辑（bootstrapping logic）来安装pip。\n具体安装方法为：\n从 https:\/\/bootstrap.pypa.io\/get-pip.py 下载脚本； 切换到该脚本所在目录，使用Python运行该脚本。 1python get-pip.py 安装完成之后，你可以通过使用下述命令检查pip是否已经安装成功。\n1python -m pip --version 2# 你也可以直接使用pip命令查看版本信息 3pip -V 更新 pip的更新比较容易，只需要执行一条命令即可。\n",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2023",
+      "datePublished": "2023-10-07 00:00:00 \u002b0000 UTC",
+      "dateModified" : "2023-10-07 00:00:00 \u002b0000 UTC",
+      "url" : "https:\/\/li-dong-chao.github.io\/posts\/pip%E7%9A%84%E4%BD%BF%E7%94%A8\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>pip</title>
+  <meta property="og:title" content="pip" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="pip是 Python的包安装工具， 用户可以使用该工具安装 pypi（Python包索引） 或 其他源（如 清华源）上的包。
+从本质上来说，pip其实就是一个Python的一个包，只不过这个包可以用来管理Python的其他包， 它支持从不同的包索引源安装指定版本的包，即pip支持Python包的版本控制。
+此外，pip还是一个命令行程序，在安装完pip后，会在系统中添加上pip命令， 此时可以直接在终端执行pip命令进行包的安装与管理等。
+安装 自动安装 一般情况下，当用户使用以下两种方式之一配置Python环境时，pip会自动安装好。
+用户使用 虚拟环境； 用户使用从 Python官网 下载的Python； pip官网 还提到了一种情况（ using Python that has not been modified by a redistributor to remove ensurepip），本人不太熟悉，暂时没有列到这里。
+手动安装 如果你的环境中没有pip，可以使用以下两种方式进行安装。
+ensurepip get-pip.py ensurepip ensurepip 是Python的一个内置模块，可以用来安装pip，只需执行以下命令即可。
+1python -m ensurepip --upgrade get-pip.py get-pip.py 是官方提供的一个Python脚本，它使用一些引即可导逻辑（bootstrapping logic）来安装pip。
+具体安装方法为：
+从 https://bootstrap.pypa.io/get-pip.py 下载脚本； 切换到该脚本所在目录，使用Python运行该脚本。 1python get-pip.py 安装完成之后，你可以通过使用下述命令检查pip是否已经安装成功。
+1python -m pip --version 2# 你也可以直接使用pip命令查看版本信息 3pip -V 更新 pip的更新比较容易，只需要执行一条命令即可。
+" />
+  <meta name="description" content="pip是 Python的包安装工具， 用户可以使用该工具安装 pypi（Python包索引） 或 其他源（如 清华源）上的包。
+从本质上来说，pip其实就是一个Python的一个包，只不过这个包可以用来管理Python的其他包， 它支持从不同的包索引源安装指定版本的包，即pip支持Python包的版本控制。
+此外，pip还是一个命令行程序，在安装完pip后，会在系统中添加上pip命令， 此时可以直接在终端执行pip命令进行包的安装与管理等。
+安装 自动安装 一般情况下，当用户使用以下两种方式之一配置Python环境时，pip会自动安装好。
+用户使用 虚拟环境； 用户使用从 Python官网 下载的Python； pip官网 还提到了一种情况（ using Python that has not been modified by a redistributor to remove ensurepip），本人不太熟悉，暂时没有列到这里。
+手动安装 如果你的环境中没有pip，可以使用以下两种方式进行安装。
+ensurepip get-pip.py ensurepip ensurepip 是Python的一个内置模块，可以用来安装pip，只需执行以下命令即可。
+1python -m ensurepip --upgrade get-pip.py get-pip.py 是官方提供的一个Python脚本，它使用一些引即可导逻辑（bootstrapping logic）来安装pip。
+具体安装方法为：
+从 https://bootstrap.pypa.io/get-pip.py 下载脚本； 切换到该脚本所在目录，使用Python运行该脚本。 1python get-pip.py 安装完成之后，你可以通过使用下述命令检查pip是否已经安装成功。
+1python -m pip --version 2# 你也可以直接使用pip命令查看版本信息 3pip -V 更新 pip的更新比较容易，只需要执行一条命令即可。
+" />
+  <meta property="og:locale" content="zh-CN" /><meta property="og:image" content="/favicon.svg" />
+  
+
+  
+    <style>body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:#000;text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background-color:#c3c3c3;border-radius:6px}::-webkit-scrollbar-thumb:hover{background-color:#8c8c8c}::-moz-scrollbar{width:6px;height:6px}::-moz-scrollbar-thumb{background-color:#c3c3c3;border-radius:6px}::-moz-scrollbar-thumb:hover{background-color:#8c8c8c}.markdown-body{font-family:source-serif-pro,Georgia,microsoft yahei,Cambria,times new roman,Times,serif;font-size:16px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:#000}.markdown-body blockquote{margin:0;padding:.2em 2em;color:#57606a;border-left:4px solid #4cb3d4;border-radius:6px;background-color:#e6f4ff}.highlight{border-radius:10px}.highlight pre{overflow:scroll;padding:.5em;border-radius:10px}.highlight code{display:inline-block;font-size:13px;font-family:fira code,Consolas,Monaco,andale mono,ubuntu mono,monospace}.highlight{position:relative}.highlight-copy-btn{position:absolute;top:7px;right:7px;border:0;border-radius:4px;padding:1px;font-size:.8em;line-height:1.8;color:#fff;background-color:#777;min-width:55px;text-align:center}.highlight-copy-btn:hover{background-color:#666}table,th,td{border-collapse:collapse;border:2px solid #000}table{margin:1em auto}td{padding:.5em 1em;text-align:center}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:#666}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-line{width:100%;border-width:2px;border-color:#482936;border-style:solid none none none}.lang-switch{font-weight:600}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:#000 2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-content img{max-width:100%;display:block;margin:0 auto;margin-top:12px;border-radius:10px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:#000 2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.related-content{border-width:3px;border-style:solid;border-color:#000;padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:#fff}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{text-align:center}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+  
+  
+    <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+  
+
+  
+
+  <link href="/index.xml" rel="alternate" type="application/rss+xml"
+    title="LiDongchao">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/zoom.css">
+  
+  
+
+  
+  
+</head>
+
+<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+<body>
+    <article class="post " id="article">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="site-header">
+                    
+<header>
+  <div class="header-title">
+    <a href="/"
+      >LiDongchao</a
+    >
+  </div>
+  <div class="header-subtitle">Keep the passion.</div>
+</header>
+<div class="row end-md center-xs header-items">
+  
+  <div class="header-item">
+    <a href="/" target="_self">Home</a>
+  </div>
+  
+  <div class="header-item">
+    <a href="/about" target="_self">About</a>
+  </div>
+  
+</div>
+<div class="row end-xs">
+   
+</div>
+<div class="header-line"></div>
+
+                </div>
+                <header class="post-header">
+                    <h1 class="post-title">pip</h1>
+                    
+                    <div class="row post-desc">
+                        <div class="col-xs-6">
+                            
+                            <time class="post-date" datetime=" 2023-10-07 00:00:00 UTC">
+                                07 Oct 2023
+                            </time>
+                            
+                        </div>
+                        <div class="col-xs-6">
+                            
+                        </div>
+                    </div>
+                    
+                </header>
+
+                <div class="post-content markdown-body">
+                    
+                    <p>pip是 <a href="https://packaging.python.org/en/latest/guides/tool-recommendations/">Python的包安装工具</a>，
+用户可以使用该工具安装 <a href="https://pypi.org/">pypi（Python包索引）</a> 或
+其他源（如 <a href="https://pypi.tuna.tsinghua.edu.cn/simple/">清华源</a>）上的包。</p>
+<p>从本质上来说，pip其实就是一个Python的一个包，只不过这个包可以用来管理Python的其他包，
+它支持从不同的包索引源安装指定版本的包，即pip支持Python包的版本控制。</p>
+<p>此外，pip还是一个命令行程序，在安装完pip后，会在系统中添加上pip命令，
+此时可以直接在终端执行pip命令进行包的安装与管理等。</p>
+<h2 id="安装">安装</h2>
+<h3 id="自动安装">自动安装</h3>
+<p>一般情况下，当用户使用以下两种方式之一配置Python环境时，pip会自动安装好。</p>
+<ul>
+<li>用户使用 <a href="https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-and-using-virtual-environments">虚拟环境</a>；</li>
+<li>用户使用从 <a href="https://www.python.org/">Python官网</a> 下载的Python；</li>
+</ul>
+<blockquote>
+<p><a href="https://pip.pypa.io/en/stable/installation/">pip官网</a> 还提到了一种情况（ <code>using Python that has not been modified by a redistributor to remove ensurepip</code>），本人不太熟悉，暂时没有列到这里。</p></blockquote>
+<h3 id="手动安装">手动安装</h3>
+<p>如果你的环境中没有pip，可以使用以下两种方式进行安装。</p>
+<ul>
+<li>ensurepip</li>
+<li>get-pip.py</li>
+</ul>
+<h4 id="ensurepip">ensurepip</h4>
+<p><a href="https://docs.python.org/3/library/ensurepip.html#module-ensurepip">ensurepip</a> 是Python的一个内置模块，可以用来安装pip，只需执行以下命令即可。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>python -m ensurepip --upgrade
+</span></span></code></pre></div><h4 id="get-pippy">get-pip.py</h4>
+<p><a href="https://github.com/pypa/get-pip">get-pip.py</a> 是官方提供的一个Python脚本，它使用一些引即可导逻辑（bootstrapping logic）来安装pip。</p>
+<p>具体安装方法为：</p>
+<ol>
+<li>从 <a href="https://bootstrap.pypa.io/get-pip.py">https://bootstrap.pypa.io/get-pip.py</a> 下载脚本；</li>
+<li>切换到该脚本所在目录，使用Python运行该脚本。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>python get-pip.py
+</span></span></code></pre></div><p>安装完成之后，你可以通过使用下述命令检查pip是否已经安装成功。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>python -m pip --version
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#6c7986"># 你也可以直接使用pip命令查看版本信息</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>pip -V
+</span></span></code></pre></div><h2 id="更新">更新</h2>
+<p>pip的更新比较容易，只需要执行一条命令即可。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>python -m pip install --upgrade pip
+</span></span></code></pre></div><h2 id="pip的基本使用">pip的基本使用</h2>
+<h3 id="安装包">安装包</h3>
+<p>使用pip安装包的方式有三种，分别是通过Pypi安装、通过github安装以及通过包文件（distribution file）安装。</p>
+<h4 id="pypi安装">Pypi安装</h4>
+<p>这种方法是最简单最常用的Python包安装方法。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>pip install package_name
+</span></span></code></pre></div><blockquote>
+<p>可以通过在package_name后加上 <code>==x.y.z</code>、 <code>&gt;=x.y.z</code>、 <code>&lt;=x.y.z</code>、 <code>&gt;x.y.z</code>、 <code>&lt;x.y.z</code> 实现对包版本的控制。</p></blockquote>
+<h4 id="github安装">github安装</h4>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>pip install git+https://github.com/pypa/package_name.git@main
+</span></span></code></pre></div><h4 id="包文件安装">包文件安装</h4>
+<p>通过包文件安装支持 <code>source distribution</code> 和 <code>wheel distribution</code> 两种文件。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>pip install package_name-1.0.tar.gz
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#6c7986"># 或</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>pip install package_name-1.0-py3-none-any.whl
+</span></span></code></pre></div><blockquote>
+<p>除了以上三种方式外，在实际的Python项目开发中，经常会使用 <code>requirements.txt</code> 文件来实现对Python包版本的批量控制。</p>
+<p>例如，在一个项目中你需要1.8.1版本的 <code>alembic</code> 库和0.79.1版本的 <code>fastapi</code> 库，你可以创建一个 <code>requirements.txt</code> 文件，文件内容如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>alembic==1.8.1
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>fastapi==0.79.1
+</span></span></code></pre></div><p>然后通过下面的 <code>pip</code> 命令的 <code>-r</code> 参数进行指定版本包的批量安装。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>pip install -r requirements.txt
+</span></span></code></pre></div></blockquote>
+<h3 id="更新包">更新包</h3>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>pip install --upgrade sampleproject
+</span></span></code></pre></div><h3 id="卸载包">卸载包</h3>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>pip uninstall sampleproject
+</span></span></code></pre></div><h2 id="换源">换源</h2>
+<p>pip换源对于国内的Python用户来说，是必须掌握的一项基本技能。</p>
+<p>之所以国内用户要进行pip换源，是因为pip默认的包下载源（ <code>Pypi</code> ）服务器是位于国外的，
+当国内用户从该服务器上进行包下载安装时，受限于网络问题，往往下载速度会特别慢，
+尤其是一些Python第三方库又比较大，往往会在下载时直接断掉，无法成功安装，体验极差。</p>
+<p>为了解决这一问题，国内有一些机构就针对国内用户自己搭建了镜像源，方便国内用户的使用，比较常用的镜像源有：</p>
+<ul>
+<li>
+<p>清华大学：<a href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a></p>
+</li>
+<li>
+<p>阿里云：<a href="https://mirrors.aliyun.com/pypi/simple">https://mirrors.aliyun.com/pypi/simple</a></p>
+</li>
+<li>
+<p>中国科学技术大学 <a href="https://pypi.mirrors.ustc.edu.cn/simple">https://pypi.mirrors.ustc.edu.cn/simple</a></p>
+</li>
+<li>
+<p>豆瓣：<a href="http://pypi.douban.com/simple">http://pypi.douban.com/simple</a></p>
+</li>
+</ul>
+<p>比较常用的更换镜像源方法有3种。</p>
+<h3 id="1-临时性换源">1. 临时性换源</h3>
+<p>使用 <code>pip</code> 的 <code>-i</code> 参数可以指定本次命令执行时从何处下载包文件，例如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#6c7986"># 此处示例中使用的是清华源，你可以根据自己的喜好修改成其他的镜像源</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>pip install pandas -i https://pypi.tuna.tsinghua.edu.cn/simple
+</span></span></code></pre></div><blockquote>
+<p>注意：这种方法只是临时性修改，仅对本次安装过程有效。</p></blockquote>
+<h3 id="2-修改配置文件">2. 修改配置文件</h3>
+<p><code>pip</code> 的配置文件可以分为3个级别，分别是 <strong>全局级别（Global）</strong>、 **用户级别（User）**和 <strong>站点级别（Site）</strong>。</p>
+<p>全局级别是最高的级别，全局级别的配置文件，对整个机器上的 <code>pip</code> 都生效。</p>
+<p>用户级别介于全局级别和站点级别之间，仅对当前用户的 <code>pip</code> 生效。</p>
+<p>站点级别的等级最低，仅对当前站点或者说项目生效，一般是指某个项目虚拟环境中的 <code>pip</code>。</p>
+<p>各个级别配置文件的对应的路径信息如下表所示。</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">级别</th>
+          <th style="text-align: center">级别</th>
+          <th style="text-align: center">linux</th>
+          <th style="text-align: center">macos</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">global</td>
+          <td style="text-align: center"><code>C:\ProgramData\pip\pip.ini</code></td>
+          <td style="text-align: center"><code>/etc/pip.conf</code></td>
+          <td style="text-align: center"><code>/Library/Application Support/pip/pip.conf</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">user</td>
+          <td style="text-align: center"><code>%APPDATA%\pip\pip.ini</code></td>
+          <td style="text-align: center"><code>$HOME/.pip/pip.conf</code></td>
+          <td style="text-align: center"><code>$HOME/pip/pip.conf</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">site</td>
+          <td style="text-align: center"><code>%VIRTUAL_ENV%\pip.ini</code></td>
+          <td style="text-align: center"><code>$VIRTUAL_ENV/pip.conf</code></td>
+          <td style="text-align: center"><code>$VIRTUAL_ENV/pip.conf</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>不同等级的配置文件在加载时，会按照等级由高到低的次序加载，
+当不同等级配置文件配置内容存在冲突时，后加载的内容会覆盖前面加载的内容，
+由此实现优先使用Site级别配置，然后使用User级别配置，如果都没有配置，则选用Global级别的配置。</p>
+<p>换源时，只需根据自己的需要，修改对应级别的配置文件即可。具体修改内容为在配置文件中添加如下内容即可：</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>[global]
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>[install]
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>trusted-host = https://pypi.tuna.tsinghua.edu.cn
+</span></span></code></pre></div><p><code>index-url</code> 参数指定了镜像源，添加<code>trusted-host</code>参数是为了标记信任该镜像源，否则可能会在使用https镜像源时触发警告信息。</p>
+<h3 id="1-使用命令行修改">1. 使用命令行修改</h3>
+<p>从 <code>pip10.0.0</code> 开始， <code>pip</code> 提供了 <code>config</code> 子命令用来改配置，使用 <code>pip</code> 命令的 <code>config</code> 方法便可以实现对镜像源的永久修改。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>pip config <span style="color:#d0a8ff">set</span> global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+</span></span></code></pre></div><p>如果要换回默认的Pypi源，可以使用下面的命令。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>pip config <span style="color:#d0a8ff">unset</span> global.index-url
+</span></span></code></pre></div><h2 id="其他常用命令">其他常用命令</h2>
+<h3 id="pip-list">pip list</h3>
+<p>列出当前环境中已经安装的包。</p>
+<h3 id="pip-show-a_package">pip show &lt;a_package&gt;</h3>
+<p>查看 <code>&lt;a_package&gt;</code> 的基本信息。</p>
+<blockquote>
+<p>注意： <code>a_package</code> 是一个已经安装的包。</p></blockquote>
+<h3 id="pip-freeze">pip freeze</h3>
+<p>将当前环境安装的所有包及其对应版本输出到一个requirements文件中。</p>
+<h3 id="pip-search-query">pip search &lt;query&gt;</h3>
+<p>从 <code>Pypi</code> 源搜索包含 <code>&lt;query&gt;</code> 的包。</p>
+<h2 id="参考资料">参考资料</h2>
+<ol>
+<li><a href="https://pip.pypa.io/en/stable/">pip官方介绍文档</a></li>
+</ol>
+
+                </div>
+
+                <div class="row middle-xs">
+                    <div class="col-xs-12">
+                        
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-xs-12">
+                        
+                    </div>
+                </div>
+
+                
+
+
+
+                
+                
+                <div style="height: 50px;"></div>
+                
+                
+
+                <div class="site-footer">
+  
+  
+</div>
+
+            </div>
+        </div>
+    </article>
+
+    
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/zoom.min.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+<script>
+  
+  
+    
+    
+  
+</script>
+
+    
+
+</body>
+
+</html>

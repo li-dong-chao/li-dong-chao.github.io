@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.147.1">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="" />
+  <meta property="og:url" content="https://li-dong-chao.github.io/posts/%E6%84%9F%E7%9F%A5%E6%9C%BA/" />
+  <link rel="canonical" href="https://li-dong-chao.github.io/posts/%E6%84%9F%E7%9F%A5%E6%9C%BA/" /><link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.svg" />
+  <link rel="shortcut" href="/favicon.svg" /><link rel="alternate" type="application/atom+xml" href="https://li-dong-chao.github.io/index.xml" title="LiDongchao">
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/li-dong-chao.github.io\/"
+      },
+      "articleSection" : "posts",
+      "name" : "感知机",
+      "headline" : "感知机",
+      "description" : "感知机模型是一种线性二分类判别分类模型，它根据输入的样本的特征向量，输出样本的类型。\n感知机模型假设输入数据是线性可分，其学习的目标为找到一个线性分离超平面，从而实现对样本的正确分类。\n感知机具有简单、基于实现的优点，分为原始形式和对偶形式，是神经网络和支持向量机的基础。\n感知机模型 假设输入空间为 $\\mathcal{X} \\subseteq R^n$ ，输出空间为 $\\mathcal{y} = {\u002b1, -1}$ 。 输入 $x \\in \\mathcal{X}$ 表示样本的特征向量，表示输入空间中的样本点。 输出 $y \\in \\mathcal{Y}$ 表示样本的类别。 则感知机可用下面的函数表示：\n$$ f(x) = sign(w \\cdot x \u002b b) $$\n其中，$w$ 和 $b$ 是感知机模型的参数， $w \\in R^n$ 称为权值，在一定程度上反映了各个特征向量的重要程度， $b \\in R$ 称为偏置。 公式中的点表示内积，sign为符号函数，即\n$$ sign(x) = \\begin{cases} \u002b1,\u0026amp; x \\ge 0\\\\ -1,\u0026amp; x \\lt 0 \\end{cases} $$\n感知机模型的假设空间是定义在特征空间中的所有线性分类模型， 即函数集合 ${f| f(x) = w \\cdot x \u002b b}$ 。\n",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2023",
+      "datePublished": "2023-10-05 00:00:00 \u002b0000 UTC",
+      "dateModified" : "2023-10-05 00:00:00 \u002b0000 UTC",
+      "url" : "https:\/\/li-dong-chao.github.io\/posts\/%E6%84%9F%E7%9F%A5%E6%9C%BA\/",
+      "keywords" : [ "算法", ]
+  }
+</script>
+<title>感知机</title>
+  <meta property="og:title" content="感知机" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="感知机模型是一种线性二分类判别分类模型，它根据输入的样本的特征向量，输出样本的类型。
+感知机模型假设输入数据是线性可分，其学习的目标为找到一个线性分离超平面，从而实现对样本的正确分类。
+感知机具有简单、基于实现的优点，分为原始形式和对偶形式，是神经网络和支持向量机的基础。
+感知机模型 假设输入空间为 $\mathcal{X} \subseteq R^n$ ，输出空间为 $\mathcal{y} = {&#43;1, -1}$ 。 输入 $x \in \mathcal{X}$ 表示样本的特征向量，表示输入空间中的样本点。 输出 $y \in \mathcal{Y}$ 表示样本的类别。 则感知机可用下面的函数表示：
+$$ f(x) = sign(w \cdot x &#43; b) $$
+其中，$w$ 和 $b$ 是感知机模型的参数， $w \in R^n$ 称为权值，在一定程度上反映了各个特征向量的重要程度， $b \in R$ 称为偏置。 公式中的点表示内积，sign为符号函数，即
+$$ sign(x) = \begin{cases} &#43;1,&amp; x \ge 0\\ -1,&amp; x \lt 0 \end{cases} $$
+感知机模型的假设空间是定义在特征空间中的所有线性分类模型， 即函数集合 ${f| f(x) = w \cdot x &#43; b}$ 。
+" />
+  <meta name="description" content="感知机模型是一种线性二分类判别分类模型，它根据输入的样本的特征向量，输出样本的类型。
+感知机模型假设输入数据是线性可分，其学习的目标为找到一个线性分离超平面，从而实现对样本的正确分类。
+感知机具有简单、基于实现的优点，分为原始形式和对偶形式，是神经网络和支持向量机的基础。
+感知机模型 假设输入空间为 $\mathcal{X} \subseteq R^n$ ，输出空间为 $\mathcal{y} = {&#43;1, -1}$ 。 输入 $x \in \mathcal{X}$ 表示样本的特征向量，表示输入空间中的样本点。 输出 $y \in \mathcal{Y}$ 表示样本的类别。 则感知机可用下面的函数表示：
+$$ f(x) = sign(w \cdot x &#43; b) $$
+其中，$w$ 和 $b$ 是感知机模型的参数， $w \in R^n$ 称为权值，在一定程度上反映了各个特征向量的重要程度， $b \in R$ 称为偏置。 公式中的点表示内积，sign为符号函数，即
+$$ sign(x) = \begin{cases} &#43;1,&amp; x \ge 0\\ -1,&amp; x \lt 0 \end{cases} $$
+感知机模型的假设空间是定义在特征空间中的所有线性分类模型， 即函数集合 ${f| f(x) = w \cdot x &#43; b}$ 。
+" />
+  <meta property="og:locale" content="zh-CN" /><meta property="og:image" content="/favicon.svg" />
+  
+
+  
+    <style>body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:#000;text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background-color:#c3c3c3;border-radius:6px}::-webkit-scrollbar-thumb:hover{background-color:#8c8c8c}::-moz-scrollbar{width:6px;height:6px}::-moz-scrollbar-thumb{background-color:#c3c3c3;border-radius:6px}::-moz-scrollbar-thumb:hover{background-color:#8c8c8c}.markdown-body{font-family:source-serif-pro,Georgia,microsoft yahei,Cambria,times new roman,Times,serif;font-size:16px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:#000}.markdown-body blockquote{margin:0;padding:.2em 2em;color:#57606a;border-left:4px solid #4cb3d4;border-radius:6px;background-color:#e6f4ff}.highlight{border-radius:10px}.highlight pre{overflow:scroll;padding:.5em;border-radius:10px}.highlight code{display:inline-block;font-size:13px;font-family:fira code,Consolas,Monaco,andale mono,ubuntu mono,monospace}.highlight{position:relative}.highlight-copy-btn{position:absolute;top:7px;right:7px;border:0;border-radius:4px;padding:1px;font-size:.8em;line-height:1.8;color:#fff;background-color:#777;min-width:55px;text-align:center}.highlight-copy-btn:hover{background-color:#666}table,th,td{border-collapse:collapse;border:2px solid #000}table{margin:1em auto}td{padding:.5em 1em;text-align:center}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:#666}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-line{width:100%;border-width:2px;border-color:#482936;border-style:solid none none none}.lang-switch{font-weight:600}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:#000 2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-content img{max-width:100%;display:block;margin:0 auto;margin-top:12px;border-radius:10px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:#000 2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.related-content{border-width:3px;border-style:solid;border-color:#000;padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:#fff}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{text-align:center}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+  
+  
+    <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+  
+
+  
+
+  <link href="/index.xml" rel="alternate" type="application/rss+xml"
+    title="LiDongchao">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/zoom.css">
+  
+  
+
+  
+  
+</head>
+
+<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+<body>
+    <article class="post " id="article">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="site-header">
+                    
+<header>
+  <div class="header-title">
+    <a href="/"
+      >LiDongchao</a
+    >
+  </div>
+  <div class="header-subtitle">Keep the passion.</div>
+</header>
+<div class="row end-md center-xs header-items">
+  
+  <div class="header-item">
+    <a href="/" target="_self">Home</a>
+  </div>
+  
+  <div class="header-item">
+    <a href="/about" target="_self">About</a>
+  </div>
+  
+</div>
+<div class="row end-xs">
+   
+</div>
+<div class="header-line"></div>
+
+                </div>
+                <header class="post-header">
+                    <h1 class="post-title">感知机</h1>
+                    
+                    <div class="row post-desc">
+                        <div class="col-xs-6">
+                            
+                            <time class="post-date" datetime=" 2023-10-05 00:00:00 UTC">
+                                05 Oct 2023
+                            </time>
+                            
+                        </div>
+                        <div class="col-xs-6">
+                            
+                        </div>
+                    </div>
+                    
+                </header>
+
+                <div class="post-content markdown-body">
+                    
+                    <p>感知机模型是一种线性二分类判别分类模型，它根据输入的样本的特征向量，输出样本的类型。</p>
+<p>感知机模型假设输入数据是线性可分，其学习的目标为找到一个线性分离超平面，从而实现对样本的正确分类。</p>
+<p>感知机具有简单、基于实现的优点，分为原始形式和对偶形式，是神经网络和支持向量机的基础。</p>
+<h2 id="感知机模型">感知机模型</h2>
+<p>假设输入空间为 $\mathcal{X} \subseteq R^n$ ，输出空间为 $\mathcal{y} = {+1, -1}$ 。
+输入 $x \in \mathcal{X}$ 表示样本的特征向量，表示输入空间中的样本点。
+输出 $y \in \mathcal{Y}$ 表示样本的类别。
+则感知机可用下面的函数表示：</p>
+<p>$$
+f(x) = sign(w \cdot x + b)
+$$</p>
+<p>其中，$w$ 和 $b$ 是感知机模型的参数，
+$w \in R^n$ 称为权值，在一定程度上反映了各个特征向量的重要程度，
+$b \in R$ 称为偏置。
+公式中的点表示内积，sign为符号函数，即</p>
+<p>$$
+sign(x) = \begin{cases}
++1,&amp; x \ge 0\\
+-1,&amp; x \lt 0
+\end{cases}
+$$</p>
+<p>感知机模型的假设空间是定义在特征空间中的所有线性分类模型，
+即函数集合 ${f| f(x) = w \cdot x + b}$ 。</p>
+<h2 id="感知机模型的几何理解">感知机模型的几何理解</h2>
+<p>考察线性方程 $w \cdot x + b = 0$ ，
+它对应与特征空间中的一个超平面 $S$ ，
+其中 $w$ 表示超平面的法向量， $b$ 表示超平面的截距。
+在二维空间下，其几何图像如下：</p>
+<p><img data-action="zoom" src="https://littletom.oss-cn-nanjing.aliyuncs.com/Snipaste_2023-04-23_13-05-12.png" alt="Snipaste_2023-04-23_13-05-12"></p>
+<p>感知机模型期望的是寻找到这么一个超平面能够将正负样例（图像中的 <code>o</code> 与 <code>x</code>）
+正确地分离到超平面的两侧。</p>
+<blockquote>
+<p>不难看出，超平面是由 $w$ 和 $b$ 决定的。</p></blockquote>
+<h2 id="感知机模型的损失函数">感知机模型的损失函数</h2>
+<p>关于感知机模型的损失函数，一个直观的想法是将误分类点的数量作为损失函数，
+但是它不是参数 $w$ 和 $b$ 的连续可导函数，不方便后续的求解。
+更靠谱的选择的是将误分类点到超平面的总距离作为损失函数。</p>
+<p>下面介绍损失函数的推导过程。</p>
+<p>假设存在一个超平面为 $w \cdot x + b = 0$ ，则对于输入空间中的任意点 $x_0$ ，</p>
+<p>它到超平面的距离为：</p>
+<p>$$
+d = \frac{1}{||w||}|w \cdot x + b |
+$$</p>
+<p>其中，$||w||$ 表示 $w$ 的 $L_2$ 范数。</p>
+<p>对于一个被误分类的数据点 $x_0 = (x_i, y_i)$ ，</p>
+<p>当它真实为正样本时（即 $y_i = 1 \gt 0$ ），模型将它误分类为负样本（即 $w \cdot x + b \lt 0$ ），
+因此有 $|y_i(w \cdot x_i + b)| = -y_i(w \cdot x + b)$；</p>
+<p>当它真实为负样本时（即 $y_i = -1 \lt 0$ ），模型将它误分类为正样本（即 $w \cdot x + b \gt 0$ ），
+因此有 $|y_i(w \cdot x_i + b)| = -y_i(w \cdot x + b)$。</p>
+<p>由此可以对距离公式进行去绝对值处理。</p>
+<p>$$
+\begin{aligned}
+d &amp;= \frac{1}{||w||} |w \cdot x + b | \\
+&amp;= -\frac{1}{||w||}y_i(w \cdot x + b )
+\end{aligned}
+$$</p>
+<p>假设存在 $M$ 个误分类点，则所有误分类点到超平面的距离之和为：</p>
+<p>$$
+D = -\frac{1}{||w||} \sum_{x_i \in M} y_i(w \cdot x + b )
+$$</p>
+<p>考虑到 $w$ 参数仅决定超平面的方向，其范数大小对超平面的方向不会产生影响，因此可以不考虑 $||w||$ ，
+从而得到在给定数据集 $T={(x_1, y_1), (x_2, y_2), \dots, (X_N, y_N)}$ 的条件下，感知机模型的经验风险函数为：</p>
+<p>$$
+L(w,b) = -\sum_{x_i \in M}y_i(w \cdot x+b)
+$$</p>
+<p>其中，$M$ 为误分类点的集合。</p>
+<p>找到令 $L(w,b)$ 最小的参数 $w$ 和 $b$ ，即求得了感知机模型的解。</p>
+<h2 id="模型求解">模型求解</h2>
+<p>感知机模型采用梯度下降法求解，可以分为原始形式和对偶形式两种。</p>
+<blockquote>
+<p>梯度下降法是一种常用的求解机器学习手段，其核心思路是每次都让参数沿当前下降最快的方向（即梯度）下降一定长度，
+直至损失收敛。</p>
+<p>它的核心步骤是：</p>
+<ol>
+<li>首先给定一组初始参数和学习率参数 $\eta$ ；</li>
+<li>然后根据数据计算出各个参数对损失函数的梯度；</li>
+<li>让参数沿梯度方向，下降 $\eta$ 个单位长度；</li>
+<li>重复2~3，直至模型收敛（收敛条件不同模型可能会有所不同）。</li>
+</ol>
+<p>梯度下降可以分为全量梯度下降、批量梯度下降和随机梯度下降。
+三者的区别在于计算梯度时使用的样本数量不同：</p>
+<ul>
+<li>全量梯度下降使用全部的样本来计算梯度；</li>
+<li>批量梯度下降将全部样本均为 $k$ 组（批），每次全用一组来计算梯度；</li>
+<li>随机梯度下降每次随机选择一个样本来计算梯度。</li>
+</ul>
+<p>三者各有优劣，需要合理选择使用。</p>
+<ul>
+<li>全量梯度下降求得解的质量比较高，但速度慢；</li>
+<li>随机梯度下降求解速度快，但可能陷入局部最优解；</li>
+<li>批量梯度下降是两者都考虑的一种权衡方法。</li>
+</ul></blockquote>
+<h3 id="原始形式">原始形式</h3>
+<p>感知机模型采用随机梯度下降法求解模型。</p>
+<p>根据损失函数，可以计算得到参数 $w$ 和 $b$ 对损失函数的梯度为：</p>
+<p>$$
+\begin{aligned}
+\nabla_w L(w,b) &amp;= -\sum_{x_i \in M} y_i x_i \\
+\nabla_b l(w,b) &amp;= -\sum_{x_i \in M} y_i
+\end{aligned}
+$$</p>
+<p>由此可以得到感知机模型学习算法的原始形式为：</p>
+<p><strong>输入</strong>：训练集 $T{(x_1, y_1), (x_2, y_2), \dots, (x_N, y_N)}$，学习率 $\eta (0 \lt \eta \le 1)$ ；</p>
+<p><strong>输出</strong>：$w, b$ ，感知机模型 $f(x) = sign(wx+b)$</p>
+<ol>
+<li>
+<p>选取初始参数取值 $w_0$ 和 $b_0$ ；</p>
+</li>
+<li>
+<p>在训练集中选取数据 $(x_i, y_i)$  ；</p>
+</li>
+<li>
+<p>如果该数据为误分类点（即 $y_i(w*x_i+b) \le 0$），则更新梯度：</p>
+<p>$$
+\begin{aligned}
+w &amp;\gets w + \eta y_i x_i \\
+b &amp;\gets b + \eta y_i
+\end{aligned}
+$$</p>
+</li>
+<li>
+<p>重复2~3，直至训练集中没有误分类点。</p>
+</li>
+</ol>
+<h3 id="对偶形式">对偶形式</h3>
+<p>分析原始形式算法可以发现，$w$ 和 $b$ 会不断地根据样本点取值进行改变，如果取初始值 $w_0=0, b_0=0$，
+则有最终模型收敛的 $w$ 和 $b$ 为：</p>
+<p>$$
+\begin{aligned}
+w &amp;= 0 + \alpha_1 y_1 x_1 + \alpha_2 y_2 x_2 + \dots + \alpha_N y_N x_N = \sum_{i=1}^N \alpha_i y_i x_i \\
+b &amp;= 0 + \alpha_1 y_1 + \alpha_2 y_2 + \dots + \alpha_N y_N = \sum_{i=1}^N \alpha_i y_i
+\end{aligned}
+$$</p>
+<p>其中，$\alpha_i = n_i \eta$ ，
+$n_i$ 表示在 $w$ 和 $b$ 的更新过程中，共使用样本 $(x_i, y_i)$ 更新了 $n_i$ 次。
+当样本 $(x_i, y_i)$ 对应的 $n_i$ 越大时，该样本更新次数越多，
+说明该样本越靠近分离超平面，越难分类，其对学习结果的影响越大。</p>
+<p>对偶形式的基本想法就是：根据上面的分析过程，将 $w$ 和 $b$ 表示为样本 $(x_i, y_i)$ 的线性组合。</p>
+<p>感知机学习算法的对偶形式：</p>
+<p><strong>输入</strong>：训练集 $T{(x_1, y_1), (x_2, y_2), \dots, (x_N, y_N)}$，学习率 $\eta (0 \lt \eta \le 1)$ ；</p>
+<p><strong>输出</strong>：$\alpha, b$ ，感知机模型 $f(x) = sign(\sum_{j=1}^N \alpha_j y_j x_j \cdot x + b)$ ；</p>
+<ol>
+<li>
+<p>给定初始值 $\alpha \gets 0 , b \gets 0$ ；</p>
+</li>
+<li>
+<p>在训练集中选取数据 $(x_i, y_i)$ ；</p>
+</li>
+<li>
+<p>如果该数据为误分类点（即 $y_i(\sum_{j=1}^N \alpha_j y_j x_j *x_i+b) \le 0$ ），则更新梯度：</p>
+<p>$$
+\begin{aligned}
+\alpha_j &amp;\gets \alpha_j + \eta \\
+b &amp;\gets b + \eta y_i
+\end{aligned}
+$$</p>
+</li>
+<li>
+<p>重复2~3，直至没有误分类点。</p>
+</li>
+</ol>
+<p>使用对偶形式好处是，涉及训练样本的计算都是以内积形式出现，可以体现将训练样本之间的内积全部计算出来，并以矩阵形式保存，这样模型的训练速度会加快。
+这个矩阵就是 Gram 矩阵：</p>
+<p>$$
+G = [x_i \cdot x_j ]_{N \times N}
+$$</p>
+<blockquote>
+<p>笔者尝试用python实现了感知机算法，感兴趣的同学可以移步 <a href="https://github.com/li-dong-chao/StatisticalLearning/blob/main/algo/perceptron.py">github</a> 查看。</p></blockquote>
+
+                </div>
+
+                <div class="row middle-xs">
+                    <div class="col-xs-12">
+                        
+                        <div class="post-tags">
+                            <a href="/tags/%E7%AE%97%E6%B3%95/">
+                                算法
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-xs-12">
+                        
+                    </div>
+                </div>
+
+                
+
+
+
+                
+                
+                <div style="height: 50px;"></div>
+                
+                
+
+                <div class="site-footer">
+  
+  
+</div>
+
+            </div>
+        </div>
+    </article>
+
+    
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/zoom.min.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+<script>
+  
+  
+    
+    
+  
+</script>
+
+    
+
+</body>
+
+</html>

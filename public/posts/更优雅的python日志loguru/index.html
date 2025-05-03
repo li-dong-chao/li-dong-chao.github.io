@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.147.1">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="" />
+  <meta property="og:url" content="https://li-dong-chao.github.io/posts/%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84python%E6%97%A5%E5%BF%97loguru/" />
+  <link rel="canonical" href="https://li-dong-chao.github.io/posts/%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84python%E6%97%A5%E5%BF%97loguru/" /><link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.svg" />
+  <link rel="shortcut" href="/favicon.svg" /><link rel="alternate" type="application/atom+xml" href="https://li-dong-chao.github.io/index.xml" title="LiDongchao">
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/li-dong-chao.github.io\/"
+      },
+      "articleSection" : "posts",
+      "name" : "更优雅的Python日志——loguru",
+      "headline" : "更优雅的Python日志——loguru",
+      "description" : "python内置了 logging 模块用来记录日志，但是 logging 模块使用起来有诸多不便：\n多线程安全，但是多进程不安全； 配置繁琐，无法做到“开箱即用”。 为了解决上述问题，可以尝试使用 loguru 模块，该模块使用者非常友好，可以帮助开发人员更加快速高效的完成python日志的记录。\n相较于 logging 模块，loguru 具有以下特点：\n配置方便，开箱即用； 支持日志分卷、日志压缩以及自动清理； 支持异步，多进程、多线程安全； 报错日志可以更加详细地记录； 可根据需要定制结构化日志； 支持自定义日志等级。 下面介绍一下如何使用 loguru 模块。\n安装 loguru 安装非常简单，直接使用 pip 工具安装即可。\n1pip install loguru 使用 关于 loguru 的使用方法，这里按场景进行介绍。\nloguru 中核心的概念是 logger， 核心的方法是 add ，请在下面的场景示例代码中重点关注这两点。\n打印日志到终端窗口 1from loguru import logger 2logger.info(\u0026#34;Hello, world!\u0026#34;) 3logger.info(\u0026#34;Hello, {name}!\u0026#34;, name=\u0026#34;everyone\u0026#34;) # 支持braces style 保存日志到文件 1from loguru import logger 2 3logger.add(\u0026#34;log.log\u0026#34;) 4logger.info(\u0026#34;Hello, world!\u0026#34;) 5logger.info(\u0026#34;Hello, {name}!\u0026#34;, name=\u0026#34;everyone\u0026#34;) 将日志输出到文件，只需要使用 add 方法，添加一个文件名即可，如果文件不存在，程序将会自动创建（包括创建不存在的目录）。\n",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2023",
+      "datePublished": "2023-10-13 00:00:00 \u002b0000 UTC",
+      "dateModified" : "2023-10-13 00:00:00 \u002b0000 UTC",
+      "url" : "https:\/\/li-dong-chao.github.io\/posts\/%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84python%E6%97%A5%E5%BF%97loguru\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>更优雅的Python日志——loguru</title>
+  <meta property="og:title" content="更优雅的Python日志——loguru" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="python内置了 logging 模块用来记录日志，但是 logging 模块使用起来有诸多不便：
+多线程安全，但是多进程不安全； 配置繁琐，无法做到“开箱即用”。 为了解决上述问题，可以尝试使用 loguru 模块，该模块使用者非常友好，可以帮助开发人员更加快速高效的完成python日志的记录。
+相较于 logging 模块，loguru 具有以下特点：
+配置方便，开箱即用； 支持日志分卷、日志压缩以及自动清理； 支持异步，多进程、多线程安全； 报错日志可以更加详细地记录； 可根据需要定制结构化日志； 支持自定义日志等级。 下面介绍一下如何使用 loguru 模块。
+安装 loguru 安装非常简单，直接使用 pip 工具安装即可。
+1pip install loguru 使用 关于 loguru 的使用方法，这里按场景进行介绍。
+loguru 中核心的概念是 logger， 核心的方法是 add ，请在下面的场景示例代码中重点关注这两点。
+打印日志到终端窗口 1from loguru import logger 2logger.info(&#34;Hello, world!&#34;) 3logger.info(&#34;Hello, {name}!&#34;, name=&#34;everyone&#34;) # 支持braces style 保存日志到文件 1from loguru import logger 2 3logger.add(&#34;log.log&#34;) 4logger.info(&#34;Hello, world!&#34;) 5logger.info(&#34;Hello, {name}!&#34;, name=&#34;everyone&#34;) 将日志输出到文件，只需要使用 add 方法，添加一个文件名即可，如果文件不存在，程序将会自动创建（包括创建不存在的目录）。
+" />
+  <meta name="description" content="python内置了 logging 模块用来记录日志，但是 logging 模块使用起来有诸多不便：
+多线程安全，但是多进程不安全； 配置繁琐，无法做到“开箱即用”。 为了解决上述问题，可以尝试使用 loguru 模块，该模块使用者非常友好，可以帮助开发人员更加快速高效的完成python日志的记录。
+相较于 logging 模块，loguru 具有以下特点：
+配置方便，开箱即用； 支持日志分卷、日志压缩以及自动清理； 支持异步，多进程、多线程安全； 报错日志可以更加详细地记录； 可根据需要定制结构化日志； 支持自定义日志等级。 下面介绍一下如何使用 loguru 模块。
+安装 loguru 安装非常简单，直接使用 pip 工具安装即可。
+1pip install loguru 使用 关于 loguru 的使用方法，这里按场景进行介绍。
+loguru 中核心的概念是 logger， 核心的方法是 add ，请在下面的场景示例代码中重点关注这两点。
+打印日志到终端窗口 1from loguru import logger 2logger.info(&#34;Hello, world!&#34;) 3logger.info(&#34;Hello, {name}!&#34;, name=&#34;everyone&#34;) # 支持braces style 保存日志到文件 1from loguru import logger 2 3logger.add(&#34;log.log&#34;) 4logger.info(&#34;Hello, world!&#34;) 5logger.info(&#34;Hello, {name}!&#34;, name=&#34;everyone&#34;) 将日志输出到文件，只需要使用 add 方法，添加一个文件名即可，如果文件不存在，程序将会自动创建（包括创建不存在的目录）。
+" />
+  <meta property="og:locale" content="zh-CN" /><meta property="og:image" content="/favicon.svg" />
+  
+
+  
+    <style>body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:#000;text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background-color:#c3c3c3;border-radius:6px}::-webkit-scrollbar-thumb:hover{background-color:#8c8c8c}::-moz-scrollbar{width:6px;height:6px}::-moz-scrollbar-thumb{background-color:#c3c3c3;border-radius:6px}::-moz-scrollbar-thumb:hover{background-color:#8c8c8c}.markdown-body{font-family:source-serif-pro,Georgia,microsoft yahei,Cambria,times new roman,Times,serif;font-size:16px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:#000}.markdown-body blockquote{margin:0;padding:.2em 2em;color:#57606a;border-left:4px solid #4cb3d4;border-radius:6px;background-color:#e6f4ff}.highlight{border-radius:10px}.highlight pre{overflow:scroll;padding:.5em;border-radius:10px}.highlight code{display:inline-block;font-size:13px;font-family:fira code,Consolas,Monaco,andale mono,ubuntu mono,monospace}.highlight{position:relative}.highlight-copy-btn{position:absolute;top:7px;right:7px;border:0;border-radius:4px;padding:1px;font-size:.8em;line-height:1.8;color:#fff;background-color:#777;min-width:55px;text-align:center}.highlight-copy-btn:hover{background-color:#666}table,th,td{border-collapse:collapse;border:2px solid #000}table{margin:1em auto}td{padding:.5em 1em;text-align:center}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:#666}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-line{width:100%;border-width:2px;border-color:#482936;border-style:solid none none none}.lang-switch{font-weight:600}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:#000 2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-content img{max-width:100%;display:block;margin:0 auto;margin-top:12px;border-radius:10px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:#000 2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.related-content{border-width:3px;border-style:solid;border-color:#000;padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:#fff}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{text-align:center}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+  
+  
+    <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+  
+
+  
+
+  <link href="/index.xml" rel="alternate" type="application/rss+xml"
+    title="LiDongchao">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/zoom.css">
+  
+  
+
+  
+  
+</head>
+
+<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+<body>
+    <article class="post " id="article">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="site-header">
+                    
+<header>
+  <div class="header-title">
+    <a href="/"
+      >LiDongchao</a
+    >
+  </div>
+  <div class="header-subtitle">Keep the passion.</div>
+</header>
+<div class="row end-md center-xs header-items">
+  
+  <div class="header-item">
+    <a href="/" target="_self">Home</a>
+  </div>
+  
+  <div class="header-item">
+    <a href="/about" target="_self">About</a>
+  </div>
+  
+</div>
+<div class="row end-xs">
+   
+</div>
+<div class="header-line"></div>
+
+                </div>
+                <header class="post-header">
+                    <h1 class="post-title">更优雅的Python日志——loguru</h1>
+                    
+                    <div class="row post-desc">
+                        <div class="col-xs-6">
+                            
+                            <time class="post-date" datetime=" 2023-10-13 00:00:00 UTC">
+                                13 Oct 2023
+                            </time>
+                            
+                        </div>
+                        <div class="col-xs-6">
+                            
+                        </div>
+                    </div>
+                    
+                </header>
+
+                <div class="post-content markdown-body">
+                    
+                    <p>python内置了 <code>logging</code> 模块用来记录日志，但是 <code>logging</code> 模块使用起来有诸多不便：</p>
+<ul>
+<li>多线程安全，但是多进程不安全；</li>
+<li>配置繁琐，无法做到“开箱即用”。</li>
+</ul>
+<p>为了解决上述问题，可以尝试使用 <code>loguru</code> 模块，该模块使用者非常友好，可以帮助开发人员更加快速高效的完成python日志的记录。</p>
+<p>相较于 <code>logging</code> 模块，<code>loguru</code> 具有以下特点：</p>
+<ul>
+<li>配置方便，开箱即用；</li>
+<li>支持日志分卷、日志压缩以及自动清理；</li>
+<li>支持异步，多进程、多线程安全；</li>
+<li>报错日志可以更加详细地记录；</li>
+<li>可根据需要定制结构化日志；</li>
+<li>支持自定义日志等级。</li>
+</ul>
+<p>下面介绍一下如何使用 <code>loguru</code> 模块。</p>
+<h2 id="安装">安装</h2>
+<p><code>loguru</code> 安装非常简单，直接使用 <code>pip</code> 工具安装即可。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>pip install loguru
+</span></span></code></pre></div><h2 id="使用">使用</h2>
+<p>关于 <code>loguru</code> 的使用方法，这里按场景进行介绍。</p>
+<blockquote>
+<p><code>loguru</code> 中核心的概念是 <code>logger</code>， 核心的方法是 <code>add</code> ，请在下面的场景示例代码中重点关注这两点。</p></blockquote>
+<h3 id="打印日志到终端窗口">打印日志到终端窗口</h3>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#fc5fa3">from</span> loguru <span style="color:#fc5fa3">import</span> logger
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>logger.info(<span style="color:#fc6a5d">&#34;Hello, world!&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>logger.info(<span style="color:#fc6a5d">&#34;Hello, </span><span style="color:#fc6a5d">{name}</span><span style="color:#fc6a5d">!&#34;</span>, name=<span style="color:#fc6a5d">&#34;everyone&#34;</span>)  <span style="color:#6c7986"># 支持braces style</span>
+</span></span></code></pre></div><p><img data-action="zoom" src="https://littletom.oss-cn-nanjing.aliyuncs.com/image-20231013100017818.png" alt="image-20231013100017818"></p>
+<h3 id="保存日志到文件">保存日志到文件</h3>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#fc5fa3">from</span> loguru <span style="color:#fc5fa3">import</span> logger
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>logger.add(<span style="color:#fc6a5d">&#34;log.log&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>logger.info(<span style="color:#fc6a5d">&#34;Hello, world!&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>logger.info(<span style="color:#fc6a5d">&#34;Hello, </span><span style="color:#fc6a5d">{name}</span><span style="color:#fc6a5d">!&#34;</span>, name=<span style="color:#fc6a5d">&#34;everyone&#34;</span>)
+</span></span></code></pre></div><p>将日志输出到文件，只需要使用 <code>add</code> 方法，添加一个文件名即可，如果文件不存在，程序将会自动创建（包括创建不存在的目录）。</p>
+<p><img data-action="zoom" src="https://littletom.oss-cn-nanjing.aliyuncs.com/image-20231013101544570.png" alt="image-20231013101544570"></p>
+<p>注意：执行 <code>from loguru import logger</code> 后，程序会默认创建一个将日志展示在终端窗口的 <code>handler</code> ，上面代码中的 <code>add</code> 方法会在此基础上在创建一个输出到 <code>log.log</code> 的 <code>handler</code> ，如果不想在终端展示日志，可以使用下面的代码。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#fc5fa3">from</span> loguru <span style="color:#fc5fa3">import</span> logger
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>logger.remove()  <span style="color:#6c7986"># 移除所有的日志输出</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>logger.add(<span style="color:#fc6a5d">&#34;log.log&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>logger.info(<span style="color:#fc6a5d">&#34;Hello, world!&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>logger.info(<span style="color:#fc6a5d">&#34;Hello, </span><span style="color:#fc6a5d">{name}</span><span style="color:#fc6a5d">!&#34;</span>, name=<span style="color:#fc6a5d">&#34;everyone&#34;</span>)
+</span></span></code></pre></div><p><code>logger.remove()</code> 将移除前面的所有 <code>handler</code> ，所以在使用 <code>add</code> 方法后，便只有输出到文件的一个 <code>handler</code> ，终端将不会显示日志信息。</p>
+<p>如果想重新输出到终端，可以添加代码 <code>logger.add(sys.stdout)</code> 。</p>
+<h3 id="日志分卷">日志分卷</h3>
+<p>在实际记录日志时，可能需要按某些条件来对日志进行切分，如每天的日志记录在一个日志文件中。 <code>loguru</code> 可以很方便的实现这一需求。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#fc5fa3">from</span> loguru <span style="color:#fc5fa3">import</span> logger
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>logger.add(
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>    <span style="color:#fc6a5d">&#34;log_{time:YYYY-MM-DD}.log&#34;</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span> rotation=<span style="color:#fc6a5d">&#34;00:00&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>logger.info(<span style="color:#fc6a5d">&#34;Hello, world!&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span><span>logger.info(<span style="color:#fc6a5d">&#34;Hello, </span><span style="color:#fc6a5d">{name}</span><span style="color:#fc6a5d">!&#34;</span>, name=<span style="color:#fc6a5d">&#34;everyone&#34;</span>)
+</span></span></code></pre></div><p><img data-action="zoom" src="https://littletom.oss-cn-nanjing.aliyuncs.com/image-20231013104043169.png" alt="image-20231013104043169"></p>
+<p>上面的程序将会在每天 <code>00:00</code> 重新创建一个日志文件保存当天的日志信息。</p>
+<p>日志文件名的格式可以自己定义，如 <code>log_{time:YYYY-MM-DD}.log</code>。重新创建新文件的时间也可以通过 <code>rotation</code> 参数定义，通过该参数可以设置重新生成新日志文件的条件（支持<strong>按文件大小</strong>和<strong>时间</strong>两种条件），下面是一些例子。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>logger.add(<span style="color:#fc6a5d">&#34;log.log&#34;</span>, rotation=<span style="color:#fc6a5d">&#34;50M&#34;</span>)      <span style="color:#6c7986"># 文件超过50M则另起一个文件</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>logger.add(<span style="color:#fc6a5d">&#34;log.log&#34;</span>, rotation=<span style="color:#fc6a5d">&#34;00:00&#34;</span>)    <span style="color:#6c7986"># 每天00:00另起一个文件</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>logger.add(<span style="color:#fc6a5d">&#34;log.log&#34;</span>, rotation=<span style="color:#fc6a5d">&#34;1 week&#34;</span>)   <span style="color:#6c7986"># 每周另起一个文件</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>logger.add(<span style="color:#fc6a5d">&#34;log.log&#34;</span>, rotation=<span style="color:#fc6a5d">&#34;10 days&#34;</span>)  <span style="color:#6c7986"># 每10天另起一个文件</span>
+</span></span></code></pre></div><h3 id="自定义日志格式">自定义日志格式</h3>
+<p><code>loguru</code> 支持自定义日志格式，只需要在 <code>add</code> 方法中添加 <code>format</code> 参数进行控制即可。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#fc5fa3">import</span> sys
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#fc5fa3">from</span> loguru <span style="color:#fc5fa3">import</span> logger
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>logger.remove()
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>logger.add(sys.stdout, <span style="color:#d0a8ff">format</span>=<span style="color:#fc6a5d">&#34;{time:YYYY-MM-DD at HH:mm:ss} | &lt;red&gt;</span><span style="color:#fc6a5d">{level}</span><span style="color:#fc6a5d">&lt;/red&gt; | &lt;green&gt;</span><span style="color:#fc6a5d">{file}</span><span style="color:#fc6a5d">&lt;/green&gt; | &lt;b&gt;&lt;i&gt;</span><span style="color:#fc6a5d">{message}</span><span style="color:#fc6a5d">&lt;/i&gt;&lt;/b&gt;&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>logger.info(<span style="color:#fc6a5d">&#34;Hello, world!&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>logger.info(<span style="color:#fc6a5d">&#34;Hello, </span><span style="color:#fc6a5d">{name}</span><span style="color:#fc6a5d">!&#34;</span>, name=<span style="color:#fc6a5d">&#34;everyone&#34;</span>)
+</span></span></code></pre></div><p><img data-action="zoom" src="https://littletom.oss-cn-nanjing.aliyuncs.com/image-20231013105819246.png" alt="image-20231013105819246"></p>
+<p>在 <code>format</code> 中，可以通过 <code>{param}</code> 的形式设置内容，通过 <code>&lt;tag&gt;&lt;/tag&gt;</code> 的形式设置格式。</p>
+<p>常见的内容参数有：</p>
+<table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>time</td>
+          <td>时间</td>
+      </tr>
+      <tr>
+          <td>level</td>
+          <td>日志等级</td>
+      </tr>
+      <tr>
+          <td>file</td>
+          <td>文件名</td>
+      </tr>
+      <tr>
+          <td>message</td>
+          <td>日志信息</td>
+      </tr>
+      <tr>
+          <td>path</td>
+          <td>文件路径</td>
+      </tr>
+      <tr>
+          <td>function</td>
+          <td>函数</td>
+      </tr>
+      <tr>
+          <td>line</td>
+          <td>行数</td>
+      </tr>
+      <tr>
+          <td>module</td>
+          <td>模块</td>
+      </tr>
+      <tr>
+          <td>process</td>
+          <td>进程信息</td>
+      </tr>
+      <tr>
+          <td>thread</td>
+          <td>线程信息</td>
+      </tr>
+      <tr>
+          <td>tzinfo</td>
+          <td>时区信息</td>
+      </tr>
+      <tr>
+          <td>exception</td>
+          <td>异常信息</td>
+      </tr>
+  </tbody>
+</table>
+<p>常见标签格式可以参考<a href="https://loguru.readthedocs.io/en/stable/api/logger.html#color">这里</a>。</p>
+<h3 id="其他常用配置">其他常用配置</h3>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#6c7986"># retention 参数可以设置日志保存时间，到时间后日志会自动清理，注意与 rotation 区分</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>logger.add(<span style="color:#fc6a5d">&#34;log.log&#34;</span>, retention=<span style="color:#fc6a5d">&#34;10 days&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span><span style="color:#6c7986"># compression 可以对关闭的日志（如 rotation 处理的日志）进行压缩，节约空间</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>logger.add(<span style="color:#fc6a5d">&#34;log.log&#34;</span>, compression=<span style="color:#fc6a5d">&#34;zip&#34;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span><span style="color:#6c7986"># enqueue=True 可以支持异步写入，实现多进程安全</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>logger.add(<span style="color:#fc6a5d">&#34;log.log&#34;</span>, enqueue=<span style="color:#fc5fa3">True</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span><span style="color:#6c7986"># filter 参数可以设置日志的过滤规则</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span><span style="color:#6c7986"># 过滤不包含 hello 的日志</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>logger.add(<span style="color:#fc6a5d">&#34;log.log&#34;</span>, <span style="color:#d0a8ff">filter</span>=<span style="color:#fc5fa3">lambda</span> x: <span style="color:#fc6a5d">&#34;hello&#34;</span> not in x[<span style="color:#fc6a5d">&#34;message&#34;</span>])
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span><span style="color:#6c7986"># encoding 设置编码方式</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span><span style="color:#6c7986"># level 设置日志等级，大于该等级的日志会被记录</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span><span>logger.add(<span style="color:#fc6a5d">&#34;log.log&#34;</span>, encoding=<span style="color:#fc6a5d">&#34;utf-8&#34;</span>, level=<span style="color:#fc6a5d">&#34;INFO&#34;</span>)
+</span></span></code></pre></div><h3 id="日志配置推荐">日志配置推荐</h3>
+<p>作为参考，这里给出一个简单的日志配置。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#fc5fa3">import</span> os
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#fc5fa3">import</span> time
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span><span style="color:#fc5fa3">from</span> loguru <span style="color:#fc5fa3">import</span> logger
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>logger_dir = <span style="color:#fc6a5d">&#34;./log&#34;</span>  <span style="color:#6c7986"># 这里是日志的存放目录，需要根据你的项目进行修改</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>log_path = os.path.join(logger_dir, <span style="color:#fc6a5d">f</span><span style="color:#fc6a5d">&#39;</span><span style="color:#fc6a5d">{</span>time.strftime(<span style="color:#fc6a5d">&#34;%Y%m&#34;</span>)<span style="color:#fc6a5d">}</span><span style="color:#fc6a5d">&#39;</span>, <span style="color:#fc6a5d">&#39;{time:YYYY_MM_DD}.log&#39;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>logger.add(
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>    log_path,
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>    rotation=<span style="color:#fc6a5d">&#34;00:00&#34;</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>    retention=<span style="color:#fc6a5d">&#34;30 days&#34;</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>    enqueue=<span style="color:#fc5fa3">True</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>    encoding=<span style="color:#fc6a5d">&#34;utf-8&#34;</span>,
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>    level=<span style="color:#fc6a5d">&#34;INFO&#34;</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span>)
+</span></span></code></pre></div><p><code>loguru</code>的特性还有很多，更多关于 <code>loguru</code> 的用法可以直接去官方文档查看。</p>
+<h2 id="参考连接">参考连接</h2>
+<ul>
+<li>
+<p><a href="https://loguru.readthedocs.io/en/stable/overview.html">loguru官方文档</a></p>
+</li>
+<li>
+<p><a href="https://www.cnblogs.com/wenqiangit/p/11194551.html">Python 第三方日志框架loguru使用</a></p>
+</li>
+</ul>
+
+                </div>
+
+                <div class="row middle-xs">
+                    <div class="col-xs-12">
+                        
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-xs-12">
+                        
+                    </div>
+                </div>
+
+                
+
+
+
+                
+                
+                <div style="height: 50px;"></div>
+                
+                
+
+                <div class="site-footer">
+  
+  
+</div>
+
+            </div>
+        </div>
+    </article>
+
+    
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/zoom.min.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+<script>
+  
+  
+    
+    
+  
+</script>
+
+    
+
+</body>
+
+</html>

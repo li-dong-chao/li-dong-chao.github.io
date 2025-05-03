@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.147.1">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="" />
+  <meta property="og:url" content="https://li-dong-chao.github.io/posts/html%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" />
+  <link rel="canonical" href="https://li-dong-chao.github.io/posts/html%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" /><link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.svg" />
+  <link rel="shortcut" href="/favicon.svg" /><link rel="alternate" type="application/atom+xml" href="https://li-dong-chao.github.io/index.xml" title="LiDongchao">
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/li-dong-chao.github.io\/"
+      },
+      "articleSection" : "posts",
+      "name" : "html基本语法",
+      "headline" : "html基本语法",
+      "description" : "html是一种超文本标记语言（Hyper Text Markup Language），它描述网页基本结构的一种语言。\n与 Java 等语言不同，html 语言不是编程语言，而是一种标记语言。\n所谓 超文本 主要体现在：\n它可以在内容中定义图片、声音、音频等多媒体信息； 它可以给网页内容增加链接信息，实现从一个文件链接到另一个文件，即超链接。 html语法规范 基本语法 HTML 标签是由尖括号包围的关键词，例如 \u0026lt;html\u0026gt;。 HTML 标签通常是成对出现的，例如 \u0026lt;html\u0026gt; 和 \u0026lt;\/html\u0026gt; ，我们称为双标签。 标签对中的第一个标签是开始标签，第二个标签是结束标签。 有些特殊的标签必须是单个标签（极少情况），例如 \u0026lt;br \/\u0026gt;，我们称为单标签。 标签关系 标签关系主要分为两种，分别是 包含关系 和 并列关系。\n包含关系是指一个标签在另一个标签的内部，如：\n1\u0026lt;head\u0026gt; 2 \u0026lt;title\u0026gt; \u0026lt;title\u0026gt; 3\u0026lt;\/head\u0026gt; 并列关系是指两个标签互不包含，彼此并列存在，如：\n1\u0026lt;head\u0026gt; \u0026lt;\/head\u0026gt; 2\u0026lt;body\u0026gt; \u0026lt;\/body\u0026gt; html基本结构标签 每个网页都会一个基本的结构标签（或称骨架标签）， 网页的具体内容也是在这个基本结构标签的基础之上进行编写。\n一个标准的基本html标签结构如下：\n1\u0026lt;html\u0026gt; 2 \u0026lt;head\u0026gt; 3 \u0026lt;title\u0026gt;\u0026lt;\/title\u0026gt; 4 \u0026lt;\/head\u0026gt; 5 \u0026lt;body\u0026gt; 6 在这里写页面 7 \u0026lt;\/body\u0026gt; 8\u0026lt;\/html\u0026gt; html语法 \u0026lt;html\u0026gt;\u0026lt;\/html\u0026gt;\n",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2023",
+      "datePublished": "2023-09-08 00:00:00 \u002b0000 UTC",
+      "dateModified" : "2023-09-08 00:00:00 \u002b0000 UTC",
+      "url" : "https:\/\/li-dong-chao.github.io\/posts\/html%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>html基本语法</title>
+  <meta property="og:title" content="html基本语法" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="html是一种超文本标记语言（Hyper Text Markup Language），它描述网页基本结构的一种语言。
+与 Java 等语言不同，html 语言不是编程语言，而是一种标记语言。
+所谓 超文本 主要体现在：
+它可以在内容中定义图片、声音、音频等多媒体信息； 它可以给网页内容增加链接信息，实现从一个文件链接到另一个文件，即超链接。 html语法规范 基本语法 HTML 标签是由尖括号包围的关键词，例如 &lt;html&gt;。 HTML 标签通常是成对出现的，例如 &lt;html&gt; 和 &lt;/html&gt; ，我们称为双标签。 标签对中的第一个标签是开始标签，第二个标签是结束标签。 有些特殊的标签必须是单个标签（极少情况），例如 &lt;br /&gt;，我们称为单标签。 标签关系 标签关系主要分为两种，分别是 包含关系 和 并列关系。
+包含关系是指一个标签在另一个标签的内部，如：
+1&lt;head&gt; 2 &lt;title&gt; &lt;title&gt; 3&lt;/head&gt; 并列关系是指两个标签互不包含，彼此并列存在，如：
+1&lt;head&gt; &lt;/head&gt; 2&lt;body&gt; &lt;/body&gt; html基本结构标签 每个网页都会一个基本的结构标签（或称骨架标签）， 网页的具体内容也是在这个基本结构标签的基础之上进行编写。
+一个标准的基本html标签结构如下：
+1&lt;html&gt; 2 &lt;head&gt; 3 &lt;title&gt;&lt;/title&gt; 4 &lt;/head&gt; 5 &lt;body&gt; 6 在这里写页面 7 &lt;/body&gt; 8&lt;/html&gt; html语法 &lt;html&gt;&lt;/html&gt;
+" />
+  <meta name="description" content="html是一种超文本标记语言（Hyper Text Markup Language），它描述网页基本结构的一种语言。
+与 Java 等语言不同，html 语言不是编程语言，而是一种标记语言。
+所谓 超文本 主要体现在：
+它可以在内容中定义图片、声音、音频等多媒体信息； 它可以给网页内容增加链接信息，实现从一个文件链接到另一个文件，即超链接。 html语法规范 基本语法 HTML 标签是由尖括号包围的关键词，例如 &lt;html&gt;。 HTML 标签通常是成对出现的，例如 &lt;html&gt; 和 &lt;/html&gt; ，我们称为双标签。 标签对中的第一个标签是开始标签，第二个标签是结束标签。 有些特殊的标签必须是单个标签（极少情况），例如 &lt;br /&gt;，我们称为单标签。 标签关系 标签关系主要分为两种，分别是 包含关系 和 并列关系。
+包含关系是指一个标签在另一个标签的内部，如：
+1&lt;head&gt; 2 &lt;title&gt; &lt;title&gt; 3&lt;/head&gt; 并列关系是指两个标签互不包含，彼此并列存在，如：
+1&lt;head&gt; &lt;/head&gt; 2&lt;body&gt; &lt;/body&gt; html基本结构标签 每个网页都会一个基本的结构标签（或称骨架标签）， 网页的具体内容也是在这个基本结构标签的基础之上进行编写。
+一个标准的基本html标签结构如下：
+1&lt;html&gt; 2 &lt;head&gt; 3 &lt;title&gt;&lt;/title&gt; 4 &lt;/head&gt; 5 &lt;body&gt; 6 在这里写页面 7 &lt;/body&gt; 8&lt;/html&gt; html语法 &lt;html&gt;&lt;/html&gt;
+" />
+  <meta property="og:locale" content="zh-CN" /><meta property="og:image" content="/favicon.svg" />
+  
+
+  
+    <style>body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:#000;text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background-color:#c3c3c3;border-radius:6px}::-webkit-scrollbar-thumb:hover{background-color:#8c8c8c}::-moz-scrollbar{width:6px;height:6px}::-moz-scrollbar-thumb{background-color:#c3c3c3;border-radius:6px}::-moz-scrollbar-thumb:hover{background-color:#8c8c8c}.markdown-body{font-family:source-serif-pro,Georgia,microsoft yahei,Cambria,times new roman,Times,serif;font-size:16px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:#000}.markdown-body blockquote{margin:0;padding:.2em 2em;color:#57606a;border-left:4px solid #4cb3d4;border-radius:6px;background-color:#e6f4ff}.highlight{border-radius:10px}.highlight pre{overflow:scroll;padding:.5em;border-radius:10px}.highlight code{display:inline-block;font-size:13px;font-family:fira code,Consolas,Monaco,andale mono,ubuntu mono,monospace}.highlight{position:relative}.highlight-copy-btn{position:absolute;top:7px;right:7px;border:0;border-radius:4px;padding:1px;font-size:.8em;line-height:1.8;color:#fff;background-color:#777;min-width:55px;text-align:center}.highlight-copy-btn:hover{background-color:#666}table,th,td{border-collapse:collapse;border:2px solid #000}table{margin:1em auto}td{padding:.5em 1em;text-align:center}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:#666}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-line{width:100%;border-width:2px;border-color:#482936;border-style:solid none none none}.lang-switch{font-weight:600}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:#000 2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-content img{max-width:100%;display:block;margin:0 auto;margin-top:12px;border-radius:10px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:#000 2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.related-content{border-width:3px;border-style:solid;border-color:#000;padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:#fff}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{text-align:center}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+  
+  
+    <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+  
+
+  
+
+  <link href="/index.xml" rel="alternate" type="application/rss+xml"
+    title="LiDongchao">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/zoom.css">
+  
+  
+
+  
+  
+</head>
+
+<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+<body>
+    <article class="post " id="article">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="site-header">
+                    
+<header>
+  <div class="header-title">
+    <a href="/"
+      >LiDongchao</a
+    >
+  </div>
+  <div class="header-subtitle">Keep the passion.</div>
+</header>
+<div class="row end-md center-xs header-items">
+  
+  <div class="header-item">
+    <a href="/" target="_self">Home</a>
+  </div>
+  
+  <div class="header-item">
+    <a href="/about" target="_self">About</a>
+  </div>
+  
+</div>
+<div class="row end-xs">
+   
+</div>
+<div class="header-line"></div>
+
+                </div>
+                <header class="post-header">
+                    <h1 class="post-title">html基本语法</h1>
+                    
+                    <div class="row post-desc">
+                        <div class="col-xs-6">
+                            
+                            <time class="post-date" datetime=" 2023-09-08 00:00:00 UTC">
+                                08 Sep 2023
+                            </time>
+                            
+                        </div>
+                        <div class="col-xs-6">
+                            
+                        </div>
+                    </div>
+                    
+                </header>
+
+                <div class="post-content markdown-body">
+                    
+                    <p>html是一种超文本标记语言（Hyper Text Markup Language），它描述网页基本结构的一种语言。</p>
+<p>与 <code>Java</code> 等语言不同，<code>html</code> 语言不是编程语言，而是一种标记语言。</p>
+<p>所谓 <strong>超文本</strong> 主要体现在：</p>
+<ul>
+<li>它可以在内容中定义图片、声音、音频等多媒体信息；</li>
+<li>它可以给网页内容增加链接信息，实现从一个文件链接到另一个文件，即超链接。</li>
+</ul>
+<h2 id="html语法规范">html语法规范</h2>
+<h3 id="基本语法">基本语法</h3>
+<ol>
+<li>HTML 标签是由尖括号包围的关键词，例如 <code>&lt;html&gt;</code>。</li>
+<li>HTML 标签通常是成对出现的，例如 <code>&lt;html&gt;</code> 和 <code>&lt;/html&gt;</code> ，我们称为双标签。
+标签对中的第一个标签是开始标签，第二个标签是结束标签。</li>
+<li>有些特殊的标签必须是单个标签（极少情况），例如 <code>&lt;br /&gt;</code>，我们称为单标签。</li>
+</ol>
+<h3 id="标签关系">标签关系</h3>
+<p>标签关系主要分为两种，分别是 <strong>包含关系</strong> 和 <strong>并列关系</strong>。</p>
+<p>包含关系是指一个标签在另一个标签的内部，如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;head&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>    &lt;title&gt; &lt;title&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>&lt;/head&gt;
+</span></span></code></pre></div><p>并列关系是指两个标签互不包含，彼此并列存在，如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;head&gt; &lt;/head&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>&lt;body&gt; &lt;/body&gt;
+</span></span></code></pre></div><h2 id="html基本结构标签">html基本结构标签</h2>
+<p>每个网页都会一个基本的结构标签（或称骨架标签），
+网页的具体内容也是在这个基本结构标签的基础之上进行编写。</p>
+<p>一个标准的基本html标签结构如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;html&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>    &lt;head&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>        &lt;title&gt;&lt;/title&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>    &lt;/head&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>    &lt;body&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>        在这里写页面
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>    &lt;/body&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span><span>&lt;/html&gt;
+</span></span></code></pre></div><h2 id="html语法">html语法</h2>
+<ul>
+<li>
+<p><code>&lt;html&gt;&lt;/html&gt;</code></p>
+<p>html标签，页面中最大的标签，称为根标签；</p>
+</li>
+<li>
+<p><code>&lt;head&gt;&lt;/head&gt;</code></p>
+<p>文档的头部，必须包含title标签；</p>
+</li>
+<li>
+<p><code>&lt;title&gt;&lt;/title&gt;</code></p>
+<p>文档标题；</p>
+</li>
+<li>
+<p><code>&lt;body&gt;&lt;/body&gt;</code></p>
+<p>文档主题，页面内容在该标签内编写；</p>
+</li>
+<li>
+<p><code>&lt;!DOCTYPE html&gt;</code></p>
+<p>声明文档类型，位于<code>&lt;html&gt;</code>标签之前，用于告诉浏览器使用哪种html版本来显示网页，该标签不是html标签，属于文档类型声明标签；</p>
+</li>
+<li>
+<p><code>&lt;meta charset=&quot;UTF-8&quot; /&gt;</code></p>
+<p>声明编码字符集；</p>
+</li>
+<li>
+<p><code>&lt;h1&gt; - &lt;h6&gt;</code></p>
+<p>标题标签</p>
+</li>
+<li>
+<p><code>&lt;p&gt;</code></p>
+<p>段落标签</p>
+</li>
+<li>
+<p><code>&lt;br /&gt;</code></p>
+<p>换行标签</p>
+</li>
+<li>
+<p><code>&lt;div&gt;&lt;/div&gt;</code></p>
+<p>盒子容器标签，用于布局，一行只能放一个<code>&lt;div&gt;</code></p>
+</li>
+<li>
+<p><code>&lt;span&gt;&lt;/span&gt;</code></p>
+<p>盒子容器标签，用于布局，一行可以放多个<code>&lt;span&gt;</code></p>
+</li>
+<li>
+<p><code>&lt;img src=&quot;图片url&quot; /&gt;</code></p>
+<p>图片标签</p>
+<p>包含属性：src(图片路径)、alt(替换文本，图像不能正常显示时显示该文字)、
+title(提示文本，鼠标放到图片上显示改文字)、width(图像宽度)、height(图像高度)、border(图像边框粗细)</p>
+</li>
+<li>
+<p><code>&lt;a&gt;&lt;/a&gt;</code></p>
+<p>超链接标签，用法如下：</p>
+<ul>
+<li><code>&lt;a href=&quot;http://www.baidu.com&quot;&gt;链接到百度&lt;/a&gt;</code></li>
+<li><code>&lt;a href=&quot;index.html&quot;&gt;链接到内部index.html页面&lt;/a&gt;</code></li>
+<li><code>&lt;a href=&quot;#&quot;&gt;空链接&lt;/a&gt;</code></li>
+<li><code>&lt;a href=&quot;#two&quot;&gt;链接到页面内其他位置，需要实现做好锚点&lt;/a&gt;</code></li>
+</ul>
+</li>
+<li>
+<p>注释内容</p>
+</li>
+<li>
+<p>特殊字符</p>
+</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">特殊字符</th>
+          <th style="text-align: center">描述</th>
+          <th style="text-align: center">代码</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">_</td>
+          <td style="text-align: center">空格符</td>
+          <td style="text-align: center"> </td>
+      </tr>
+      <tr>
+          <td style="text-align: center">&lt;</td>
+          <td style="text-align: center">小于号</td>
+          <td style="text-align: center">&lt;</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">&gt;</td>
+          <td style="text-align: center">大于号</td>
+          <td style="text-align: center">&gt;</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">&amp;</td>
+          <td style="text-align: center">和号</td>
+          <td style="text-align: center">&amp;</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">￥</td>
+          <td style="text-align: center">人民币</td>
+          <td style="text-align: center">¥</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">©</td>
+          <td style="text-align: center">版权</td>
+          <td style="text-align: center">©</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">®</td>
+          <td style="text-align: center">注册商标</td>
+          <td style="text-align: center">®</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">℃</td>
+          <td style="text-align: center">摄氏度</td>
+          <td style="text-align: center">°</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">±</td>
+          <td style="text-align: center">正负号</td>
+          <td style="text-align: center">±</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">✖</td>
+          <td style="text-align: center">乘号</td>
+          <td style="text-align: center">×</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">➗</td>
+          <td style="text-align: center">除号</td>
+          <td style="text-align: center">÷</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">²</td>
+          <td style="text-align: center">平方</td>
+          <td style="text-align: center">²</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">³</td>
+          <td style="text-align: center">立方</td>
+          <td style="text-align: center">³</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>表格标签</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span>    &lt;table&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span>        &lt;thead&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>            &lt;tr&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>                &lt;th&gt;表头&lt;/th&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>            &lt;/tr&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>        &lt;/thead&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>        &lt;tbody&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>            &lt;tr&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>                &lt;td&gt;内容&lt;/td&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>            &lt;/tr&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>        &lt;/tbody&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>    &lt;/table&gt;
+</span></span></code></pre></div><p><code>&lt;table&gt;</code>用于声明表格，<code>&lt;tr&gt;</code>用于声明行，<code>&lt;th&gt;</code>用于声明表头，<code>&lt;td&gt;</code>用于声明单元格</p>
+<p>表格属性：</p>
+<ul>
+<li>align：取值有left、center、right，设置表格对齐方式；</li>
+<li>border: 设置表格单元格的边框；</li>
+<li>cellpadding: 单元格边沿与其内容之间的空白；</li>
+<li>cellspacing: 单元格之间的空白；</li>
+<li>width：表格的宽度。</li>
+</ul>
+<p>合并单元格使用 <code>&lt;td rowspan=&quot;2&quot;&gt;内容&lt;/td&gt;</code> 和 <code>&lt;td colspan=&quot;2&quot;&gt;&lt;/td&gt;</code> 。</p>
+<ul>
+<li>
+<p>列表标签</p>
+<p>列表标签分为三类：无序列表、有序列表、自定义列表。</p>
+<ul>
+<li>
+<p>无序列表</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;ul&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>    &lt;li&gt;列表项1&lt;/li&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>    &lt;li&gt;列表项2&lt;/li&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>    &lt;li&gt;列表项3&lt;/li&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>&lt;/ul&gt;
+</span></span></code></pre></div></li>
+<li>
+<p>有序列表</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>    &lt;ol&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>        &lt;li&gt;列表项1&lt;/li&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>        &lt;li&gt;列表项2&lt;/li&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>        &lt;li&gt;列表项3&lt;/li&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>    &lt;/ol&gt;
+</span></span></code></pre></div></li>
+<li>
+<p>自定义列表</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;dl&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>    &lt;dt&gt;名词1&lt;/dt&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>        &lt;dd&gt;名词1解释1&lt;/dd&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>        &lt;dd&gt;名词1解释2&lt;/dd&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>&lt;/dl&gt;
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>表单标签</p>
+<p>一个完整的表单通常由 <strong>表单域</strong> 、 <strong>表单控件</strong> 和 <strong>提示信息</strong> 三部分组成。</p>
+<p>三个组成部分的大致用法如下：</p>
+<p><img data-action="zoom" src="../static/img/../../../_static/img/frontend/html/Snipaste_2023-05-19_12-53-47.png"></p>
+<ul>
+<li>
+<p>表单域</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;form action=<span style="color:#fc6a5d">&#34;url地址&#34;</span> method=<span style="color:#fc6a5d">&#34;提交方式&#34;</span> name=<span style="color:#fc6a5d">&#34;表单域名称&#34;</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>    各种表单元素控件
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>&lt;/form&gt;
+</span></span></code></pre></div></li>
+<li>
+<p>表单控件</p>
+<ul>
+<li>
+<p>input输入表单控件</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;input type=<span style="color:#fc6a5d">&#34;属性值&#34;</span> /&gt;
+</span></span></code></pre></div><p>type属性的属性值如下：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">属性值</th>
+          <th style="text-align: center">说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">button</td>
+          <td style="text-align: center">点击按钮</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">checkbox</td>
+          <td style="text-align: center">复选框</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">file</td>
+          <td style="text-align: center">文件上传</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">hidden</td>
+          <td style="text-align: center">隐藏的输入字段</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">image</td>
+          <td style="text-align: center">图像形式的提交按钮</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">password</td>
+          <td style="text-align: center">密码</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">radio</td>
+          <td style="text-align: center">单选按钮</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">reset</td>
+          <td style="text-align: center">重置按钮</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">submit</td>
+          <td style="text-align: center">提交按钮</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">text</td>
+          <td style="text-align: center">文本输入框</td>
+      </tr>
+  </tbody>
+</table>
+<p>input表单控件的属性：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">属性</th>
+          <th style="text-align: center">说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">name</td>
+          <td style="text-align: center">input元素的名称</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">value</td>
+          <td style="text-align: center">input元素的值</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">checked</td>
+          <td style="text-align: center">首次加载时选中元素</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">maxlength</td>
+          <td style="text-align: center">最大字符长度</td>
+      </tr>
+  </tbody>
+</table>
+<p>关于以上属性，以下几点需要注意：</p>
+<ol>
+<li>name和value是每个元素都有的属性值，主要作用是供后台人员使用；</li>
+<li>单选框和复选框要求必须有相同的name值；</li>
+<li>checked主要针对单选框和复选框；</li>
+<li>value可以用来设置初始值。</li>
+</ol>
+<p><code>&lt;label&gt;</code>标签为input元素的标注。用法如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;label for=<span style="color:#fc6a5d">&#34;sex&#34;</span>&gt;男&lt;/label&gt; 
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>&lt;input type=<span style="color:#fc6a5d">&#34;radio&#34;</span> name=<span style="color:#fc6a5d">&#34;sex&#34;</span> id=<span style="color:#fc6a5d">&#34;sex&#34;</span> /&gt;
+</span></span></code></pre></div><p>注意：<code>&lt;label&gt;</code> 标签的 for 属性应当与相关元素的 id 属性相同</p>
+</li>
+<li>
+<p>select下拉表单元素</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;select&gt; 
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>    &lt;option&gt;选项1&lt;/option&gt; 
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>    &lt;option&gt;选项2&lt;/option&gt; 
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>    &lt;option&gt;选项3&lt;/option&gt; 
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>    ...
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>&lt;/select&gt;
+</span></span></code></pre></div><p>注意：</p>
+<ol>
+<li><code>&lt;select&gt;</code>中至少包含一对<code>&lt;option&gt;</code>；</li>
+<li>在<code>&lt;option&gt;</code>中定义 selected=&ldquo;selected&quot;时，当前项即为默认选中项。</li>
+</ol>
+<ul>
+<li>textarea文本域元素</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>&lt;textarea rows=<span style="color:#fc6a5d">&#34;3&#34;</span> cols=<span style="color:#fc6a5d">&#34;20&#34;</span>&gt;
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>    文本内容
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>&lt;/textarea&gt;
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ul>
+
+                </div>
+
+                <div class="row middle-xs">
+                    <div class="col-xs-12">
+                        
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-xs-12">
+                        
+                    </div>
+                </div>
+
+                
+
+
+
+                
+                
+                <div style="height: 50px;"></div>
+                
+                
+
+                <div class="site-footer">
+  
+  
+</div>
+
+            </div>
+        </div>
+    </article>
+
+    
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/zoom.min.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+<script>
+  
+  
+    
+    
+  
+</script>
+
+    
+
+</body>
+
+</html>

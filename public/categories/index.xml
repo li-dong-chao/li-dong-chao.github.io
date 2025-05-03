@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on LiDongchao</title>
+    <link>https://li-dong-chao.github.io/categories/</link>
+    <description>Recent content in Categories on LiDongchao</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 06 Apr 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://li-dong-chao.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>机器学习</title>
+      <link>https://li-dong-chao.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Sat, 06 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>https://li-dong-chao.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Llm</title>
+      <link>https://li-dong-chao.github.io/categories/llm/</link>
+      <pubDate>Mon, 04 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://li-dong-chao.github.io/categories/llm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>https://li-dong-chao.github.io/categories/python/</link>
+      <pubDate>Wed, 01 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://li-dong-chao.github.io/categories/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>编程</title>
+      <link>https://li-dong-chao.github.io/categories/%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Sat, 07 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>https://li-dong-chao.github.io/categories/%E7%BC%96%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Linux</title>
+      <link>https://li-dong-chao.github.io/categories/linux/</link>
+      <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>https://li-dong-chao.github.io/categories/linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>前端</title>
+      <link>https://li-dong-chao.github.io/categories/%E5%89%8D%E7%AB%AF/</link>
+      <pubDate>Sun, 10 Sep 2023 00:00:00 +0000</pubDate>
+      <guid>https://li-dong-chao.github.io/categories/%E5%89%8D%E7%AB%AF/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Database</title>
+      <link>https://li-dong-chao.github.io/categories/database/</link>
+      <pubDate>Mon, 01 May 2023 00:00:00 +0000</pubDate>
+      <guid>https://li-dong-chao.github.io/categories/database/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

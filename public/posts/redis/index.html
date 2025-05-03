@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.147.1">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="" />
+  <meta property="og:url" content="https://li-dong-chao.github.io/posts/redis/" />
+  <link rel="canonical" href="https://li-dong-chao.github.io/posts/redis/" /><link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.svg" />
+  <link rel="shortcut" href="/favicon.svg" /><link rel="alternate" type="application/atom+xml" href="https://li-dong-chao.github.io/index.xml" title="LiDongchao">
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/li-dong-chao.github.io\/"
+      },
+      "articleSection" : "posts",
+      "name" : "redis",
+      "headline" : "redis",
+      "description" : "redis是什么？ redis(Remote DIctionary Server)是互联网中最广泛使用的中间件之一，他是一个开源的 key—value 型数据库， 初学者可以将redis理解为 数据结构服务器。 具体的，redis在保存数据时是以 键值对 的形式存储的， 其中值可以是字符串、哈希、列表、集合或有序集合等数据结构，因此可以将其理解为一个数据结构服务器。\nredis最广泛的应用场景是Cache，即做缓存。除此之外，它还可以用来session共享、消息队列等。\nredis特点 开源且代码非常简单优雅 编译安全非常简单，无任何系统依赖 社区活跃，各种语言广泛支持 高性能 是单线程模型（单线程仅仅是说在网络请求这一模块上用一个请求处理客户端的请求，像持久化它就会重开一个线程\/进程去进行处理。） 支持持久化 支持事务 支持主从复制模式 具有原子性 redis的安装 windows下安装redis redis的官网地址为： https:\/\/redis.io\/，官网上没有提供 windows 下的安装包， 而是建议直接使用 WSL2 来安装redis。\n如果安装了 WSL2 可以直接参考linux下redis的安装方法直接安装， 如果没有 WSL2，可以在 [这里] (https:\/\/github.com\/tporadowski\/redis\/releases) 下载适用于自己windows位数的压缩包， 直接解压即可。\n也可使用 msi 安装包，傻瓜式安装即可，这里不做详细介绍。\n解压得到文件夹内容如下：\n其中比较重要的文件有：redis-server.exe 和 redis-li.exe 文件。 前者为redis服务端启动程序，后者为redis客户端启动程序。\n双击 redis-server.exe 文件，可以启动redis服务端程序，启动后界面如下：\n然后再双击 redis-cli.exe 文件，可以启动redis客户端程序，启动后界面如下：\n输入命令 ping ，如果返回 pong ，说明已经安装成功。\n",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2023",
+      "datePublished": "2023-06-09 00:00:00 \u002b0000 UTC",
+      "dateModified" : "2023-06-09 00:00:00 \u002b0000 UTC",
+      "url" : "https:\/\/li-dong-chao.github.io\/posts\/redis\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>redis</title>
+  <meta property="og:title" content="redis" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="redis是什么？ redis(Remote DIctionary Server)是互联网中最广泛使用的中间件之一，他是一个开源的 key—value 型数据库， 初学者可以将redis理解为 数据结构服务器。 具体的，redis在保存数据时是以 键值对 的形式存储的， 其中值可以是字符串、哈希、列表、集合或有序集合等数据结构，因此可以将其理解为一个数据结构服务器。
+redis最广泛的应用场景是Cache，即做缓存。除此之外，它还可以用来session共享、消息队列等。
+redis特点 开源且代码非常简单优雅 编译安全非常简单，无任何系统依赖 社区活跃，各种语言广泛支持 高性能 是单线程模型（单线程仅仅是说在网络请求这一模块上用一个请求处理客户端的请求，像持久化它就会重开一个线程/进程去进行处理。） 支持持久化 支持事务 支持主从复制模式 具有原子性 redis的安装 windows下安装redis redis的官网地址为： https://redis.io/，官网上没有提供 windows 下的安装包， 而是建议直接使用 WSL2 来安装redis。
+如果安装了 WSL2 可以直接参考linux下redis的安装方法直接安装， 如果没有 WSL2，可以在 [这里] (https://github.com/tporadowski/redis/releases) 下载适用于自己windows位数的压缩包， 直接解压即可。
+也可使用 msi 安装包，傻瓜式安装即可，这里不做详细介绍。
+解压得到文件夹内容如下：
+其中比较重要的文件有：redis-server.exe 和 redis-li.exe 文件。 前者为redis服务端启动程序，后者为redis客户端启动程序。
+双击 redis-server.exe 文件，可以启动redis服务端程序，启动后界面如下：
+然后再双击 redis-cli.exe 文件，可以启动redis客户端程序，启动后界面如下：
+输入命令 ping ，如果返回 pong ，说明已经安装成功。
+" />
+  <meta name="description" content="redis是什么？ redis(Remote DIctionary Server)是互联网中最广泛使用的中间件之一，他是一个开源的 key—value 型数据库， 初学者可以将redis理解为 数据结构服务器。 具体的，redis在保存数据时是以 键值对 的形式存储的， 其中值可以是字符串、哈希、列表、集合或有序集合等数据结构，因此可以将其理解为一个数据结构服务器。
+redis最广泛的应用场景是Cache，即做缓存。除此之外，它还可以用来session共享、消息队列等。
+redis特点 开源且代码非常简单优雅 编译安全非常简单，无任何系统依赖 社区活跃，各种语言广泛支持 高性能 是单线程模型（单线程仅仅是说在网络请求这一模块上用一个请求处理客户端的请求，像持久化它就会重开一个线程/进程去进行处理。） 支持持久化 支持事务 支持主从复制模式 具有原子性 redis的安装 windows下安装redis redis的官网地址为： https://redis.io/，官网上没有提供 windows 下的安装包， 而是建议直接使用 WSL2 来安装redis。
+如果安装了 WSL2 可以直接参考linux下redis的安装方法直接安装， 如果没有 WSL2，可以在 [这里] (https://github.com/tporadowski/redis/releases) 下载适用于自己windows位数的压缩包， 直接解压即可。
+也可使用 msi 安装包，傻瓜式安装即可，这里不做详细介绍。
+解压得到文件夹内容如下：
+其中比较重要的文件有：redis-server.exe 和 redis-li.exe 文件。 前者为redis服务端启动程序，后者为redis客户端启动程序。
+双击 redis-server.exe 文件，可以启动redis服务端程序，启动后界面如下：
+然后再双击 redis-cli.exe 文件，可以启动redis客户端程序，启动后界面如下：
+输入命令 ping ，如果返回 pong ，说明已经安装成功。
+" />
+  <meta property="og:locale" content="zh-CN" /><meta property="og:image" content="/favicon.svg" />
+  
+
+  
+    <style>body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:#000;text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background-color:#c3c3c3;border-radius:6px}::-webkit-scrollbar-thumb:hover{background-color:#8c8c8c}::-moz-scrollbar{width:6px;height:6px}::-moz-scrollbar-thumb{background-color:#c3c3c3;border-radius:6px}::-moz-scrollbar-thumb:hover{background-color:#8c8c8c}.markdown-body{font-family:source-serif-pro,Georgia,microsoft yahei,Cambria,times new roman,Times,serif;font-size:16px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:#000}.markdown-body blockquote{margin:0;padding:.2em 2em;color:#57606a;border-left:4px solid #4cb3d4;border-radius:6px;background-color:#e6f4ff}.highlight{border-radius:10px}.highlight pre{overflow:scroll;padding:.5em;border-radius:10px}.highlight code{display:inline-block;font-size:13px;font-family:fira code,Consolas,Monaco,andale mono,ubuntu mono,monospace}.highlight{position:relative}.highlight-copy-btn{position:absolute;top:7px;right:7px;border:0;border-radius:4px;padding:1px;font-size:.8em;line-height:1.8;color:#fff;background-color:#777;min-width:55px;text-align:center}.highlight-copy-btn:hover{background-color:#666}table,th,td{border-collapse:collapse;border:2px solid #000}table{margin:1em auto}td{padding:.5em 1em;text-align:center}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:#666}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-line{width:100%;border-width:2px;border-color:#482936;border-style:solid none none none}.lang-switch{font-weight:600}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:#000 2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-content img{max-width:100%;display:block;margin:0 auto;margin-top:12px;border-radius:10px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:#000 2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.related-content{border-width:3px;border-style:solid;border-color:#000;padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:#fff}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{text-align:center}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+  
+  
+    <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+  
+
+  
+
+  <link href="/index.xml" rel="alternate" type="application/rss+xml"
+    title="LiDongchao">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/zoom.css">
+  
+  
+
+  
+  
+</head>
+
+<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+<body>
+    <article class="post " id="article">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="site-header">
+                    
+<header>
+  <div class="header-title">
+    <a href="/"
+      >LiDongchao</a
+    >
+  </div>
+  <div class="header-subtitle">Keep the passion.</div>
+</header>
+<div class="row end-md center-xs header-items">
+  
+  <div class="header-item">
+    <a href="/" target="_self">Home</a>
+  </div>
+  
+  <div class="header-item">
+    <a href="/about" target="_self">About</a>
+  </div>
+  
+</div>
+<div class="row end-xs">
+   
+</div>
+<div class="header-line"></div>
+
+                </div>
+                <header class="post-header">
+                    <h1 class="post-title">redis</h1>
+                    
+                    <div class="row post-desc">
+                        <div class="col-xs-6">
+                            
+                            <time class="post-date" datetime=" 2023-06-09 00:00:00 UTC">
+                                09 Jun 2023
+                            </time>
+                            
+                        </div>
+                        <div class="col-xs-6">
+                            
+                        </div>
+                    </div>
+                    
+                </header>
+
+                <div class="post-content markdown-body">
+                    
+                    <h2 id="redis是什么">redis是什么？</h2>
+<p>redis(Remote DIctionary Server)是互联网中最广泛使用的中间件之一，他是一个开源的 <strong>key—value</strong> 型数据库，
+初学者可以将redis理解为 <strong>数据结构服务器</strong>。
+具体的，redis在保存数据时是以 <strong>键值对</strong> 的形式存储的，
+其中值可以是字符串、哈希、列表、集合或有序集合等数据结构，因此可以将其理解为一个数据结构服务器。</p>
+<p>redis最广泛的应用场景是Cache，即做缓存。除此之外，它还可以用来session共享、消息队列等。</p>
+<h2 id="redis特点">redis特点</h2>
+<ul>
+<li>开源且代码非常简单优雅</li>
+<li>编译安全非常简单，无任何系统依赖</li>
+<li>社区活跃，各种语言广泛支持</li>
+<li>高性能</li>
+<li>是单线程模型（单线程仅仅是说在网络请求这一模块上用一个请求处理客户端的请求，像持久化它就会重开一个线程/进程去进行处理。）</li>
+<li>支持持久化</li>
+<li>支持事务</li>
+<li>支持主从复制模式</li>
+<li>具有原子性</li>
+</ul>
+<h2 id="redis的安装">redis的安装</h2>
+<h3 id="windows下安装redis">windows下安装redis</h3>
+<p>redis的官网地址为： <a href="https://redis.io/%EF%BC%8C%E5%AE%98%E7%BD%91%E4%B8%8A%E6%B2%A1%E6%9C%89%E6%8F%90%E4%BE%9B">https://redis.io/，官网上没有提供</a> windows 下的安装包，
+而是建议直接使用 WSL2 来安装redis。</p>
+<p><img data-action="zoom" src="https://littletom.oss-cn-nanjing.aliyuncs.com/Snipaste_2023-04-17_22-29-24.png" alt="Snipaste_2023-04-17_22-29-24"></p>
+<p>如果安装了 WSL2 可以直接参考linux下redis的安装方法直接安装，
+如果没有 WSL2，可以在 [这里] (<a href="https://github.com/tporadowski/redis/releases">https://github.com/tporadowski/redis/releases</a>) 下载适用于自己windows位数的压缩包，
+直接解压即可。</p>
+<p><img data-action="zoom" src="https://littletom.oss-cn-nanjing.aliyuncs.com/Snipaste_2023-04-17_22-44-38.png" alt="Snipaste_2023-04-17_22-44-38"></p>
+<blockquote>
+<p>也可使用 msi 安装包，傻瓜式安装即可，这里不做详细介绍。</p></blockquote>
+<p>解压得到文件夹内容如下：</p>
+<p><img data-action="zoom" src="https://littletom.oss-cn-nanjing.aliyuncs.com/Snipaste_2023-04-17_22-49-57.png" alt="Snipaste_2023-04-17_22-49-57"></p>
+<p>其中比较重要的文件有：<code>redis-server.exe</code> 和 <code>redis-li.exe</code> 文件。
+前者为redis服务端启动程序，后者为redis客户端启动程序。</p>
+<p>双击 <code>redis-server.exe</code> 文件，可以启动redis服务端程序，启动后界面如下：</p>
+<p><img data-action="zoom" src="https://littletom.oss-cn-nanjing.aliyuncs.com/Snipaste_2023-04-18_19-14-30.png" alt="Snipaste_2023-04-18_19-14-30"></p>
+<p>然后再双击 <code>redis-cli.exe</code> 文件，可以启动redis客户端程序，启动后界面如下：</p>
+<p><img data-action="zoom" src="https://littletom.oss-cn-nanjing.aliyuncs.com/Snipaste_2023-04-18_19-30-20.png" alt="Snipaste_2023-04-18_19-30-20"></p>
+<p>输入命令 <code>ping</code> ，如果返回 <code>pong</code> ，说明已经安装成功。</p>
+<p><img data-action="zoom" src="https://littletom.oss-cn-nanjing.aliyuncs.com/Snipaste_2023-04-18_19-31-39.png" alt="Snipaste_2023-04-18_19-31-39"></p>
+<h3 id="linux下安装redis">linux下安装redis</h3>
+<p>ubuntu系统下可以直接使用 <code>apt</code> 包管理工具直接安装redis。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#6c7986"># 更新</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>sudo apt update
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#6c7986"># 安装redis</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>sudo apt install redis
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span><span style="color:#6c7986"># 安装完成后可以使用redis-server命令启动服务端、redis-cli启动客户端</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>redis-server
+</span></span></code></pre></div><p>除了使用包管理工具自动安装，还可以使用源码直接安装redis。
+从 <a href="https://redis.io/download/">redis官网</a> 下载最新的redis源码，然后手动安装。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>wget https://github.com/redis/redis/archive/7.0.11.tar.gz -O redis.7.0.11.tar.gz
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>tar -zxvf redis.7.0.11.tar.gz 
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#d0a8ff">cd</span> redis.7.0.11 
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>make
+</span></span></code></pre></div><p>出现以下界面说明安装完成了。</p>
+<p><img data-action="zoom" src="https://littletom.oss-cn-nanjing.aliyuncs.com/Snipaste_2023-04-18_19-50-31.png" alt="Snipaste_2023-04-18_19-50-31"></p>
+<p>安装完成后， <code>src</code> 目录下将会生成 <code>redis-server</code> 和 <code>redis-cli</code> 文件，
+可以使用其启动redis服务端或客户端。</p>
+<p>如果你想把 <code>redis-server</code> 和 <code>redis-cli</code> 等程序安装到 <code>/usr/local/bin</code> 目录下，
+可以 <code>make</code> 改为 <code>make install</code> 命令。</p>
+<h2 id="连接redis服务">连接redis服务</h2>
+<p>redis支持外部应用通过 <strong>TCP连接和redis专属协议</strong> 与redis服务端进行通信，
+但同时redis也提供了客户端程序 <code>redis-cli</code> 来方便用户直接与redis服务端通信。</p>
+<p>在windows上直接双击 <code>redis-cli.exe</code> 即可打开客户端，linux系统下可以输入命令 <code>redis-cli</code> 来启动客户端。</p>
+<p>启动客户端后，他会尝试使用默认配置连接本地的redis服务端，因此在使用客户端之前需要先启动服务端。</p>
+<p>如果想要连接其他的redis服务器，可以使用下面的命令</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>redis-cli -h host -p port -a password
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#6c7986"># host为远端服务端地址，port为端口，password密码</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#6c7986"># 默认配置为：</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span><span style="color:#6c7986"># host: localhost</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span><span style="color:#6c7986"># port: 6379</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span><span style="color:#6c7986"># password: 默认无密码，无需该参数</span>
+</span></span></code></pre></div><h2 id="redis数据类型">redis数据类型</h2>
+<p>redis是一种存储数据结构的服务，因此在了解redis基础命令之前，有必要先熟悉一下redis中常用的数据结构。</p>
+<h3 id="字符串strings">字符串（Strings）</h3>
+<ul>
+<li>字符串与Java、Python等语言中的字符串含义一样，是一串字节组成的序列。</li>
+<li>字符串是redis中最常用、最基础的数据类型。</li>
+<li>在默认配置下，redis中单个字符最多能存储的数据量为512M。</li>
+<li>字符串是二进制安全的。</li>
+</ul>
+<h3 id="列表lists">列表（Lists）</h3>
+<ul>
+<li>列表是按照插入顺序排序的，多个字符串组成的链表。</li>
+<li>单个列表中的最大元素数量为 <code>2^32 - 1 (4,294,967,295)</code>。</li>
+<li>添加元素的时间复杂度为 $O(1)$ ，操作列表中元素的时间复杂度为 $O(n)$。</li>
+</ul>
+<h3 id="集合sets">集合（Sets）</h3>
+<ul>
+<li>与Java、Python等语言相同，集合表示一组无序、不重复元素组成的序列。</li>
+<li>支持集合常用的交并差等操作。</li>
+<li>单个集合中的最大元素数量为 <code>2^32 - 1 (4,294,967,295)</code>。</li>
+</ul>
+<h3 id="哈希hashes">哈希（Hashes）</h3>
+<ul>
+<li>redis哈希是以键值对形式保存进行数据保存的数据结构。</li>
+<li>大部分命令的时间复杂度为 $<code>(1)$ ， </code>HKEYS<code>、</code>HVALS<code>、</code>HGETALL` 时间复杂度为 $O(n)$ 。</li>
+<li>单个哈希中的最大键值对数量为 <code>2^32 - 1 (4,294,967,295)</code>。</li>
+</ul>
+<h3 id="有序集合sorted-sets">有序集合（Sorted Sets）</h3>
+<ul>
+<li>从字面意思就可以理解，有序集合是存在顺序的集合，其顺序体现在有序集合中的每个元素都有一个关联分数，有序集合会按分数对集合内元素排序，当存在分数相同的时候，按字典序排序。</li>
+<li>大部分操作的复杂度都是 $O(n)$ ， <code>ZRANGE</code> 命令复杂度为 $O(log(n)+m)$ ， $m$ 具体含义后续介绍命令时会详细介绍。</li>
+</ul>
+<p>除了上述5种最常用的数据类型之外，redis还支持 <code>Streams</code> 、 <code>Geospatial indexes</code> 、
+<code>Bitmaps</code> 、 <code>Bitfields</code> 、 <code>HyperLogLog</code> 等数据类型，感兴趣的可以去 <a href="https://redis.io/docs/data-types/">redis数据类型</a> 学习。</p>
+<blockquote>
+<p>二进制安全是指它可以是任何二进制的序列，包含简单的字符串，甚至图片内容以及空字符等。</p></blockquote>
+<h2 id="redis-键key">redis 键（key）</h2>
+<p>前面介绍过，redis是以键值对的形式来保存数据的。关于键，有下面几点需要注意：</p>
+<ul>
+<li>键是二进制安全的</li>
+<li>键的内部数据结构是字符串</li>
+<li>键不应该设置的太长或太短，设置的原则是尽可能使含义明确。</li>
+</ul>
+<blockquote>
+<p>​    关于键的设置，有几个小技巧:</p>
+<pre><code>* 对于确实键很长的场景，可以进行hash处理，如 `sha1` 等；
+* 巧用分号 `:` 可以使键的含义更明确，如 `user:1000:followers` 等。
+  之所以使用分号，是因为点 `.` 、下划线 `_` 、横杠 `-` 等其他分隔符在字符串中出现的概率更高。
+</code></pre></blockquote>
+<h2 id="redis命令">redis命令</h2>
+<h3 id="键key">键（key）</h3>
+<p>redis与键相关的命令如下：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">命令</th>
+          <th style="text-align: center">描述</th>
+          <th style="text-align: center">举例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">DEL</td>
+          <td style="text-align: center">用于删除key，即删除键值对</td>
+          <td style="text-align: center"><code>DELa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">DUMP</td>
+          <td style="text-align: center">序列化给定key，并返回被序列化的值</td>
+          <td style="text-align: center"><code>DUMPa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">EXISTS</td>
+          <td style="text-align: center">检查给定key是否存在</td>
+          <td style="text-align: center"><code>EXISTSa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">EXPIRE</td>
+          <td style="text-align: center">为给定key设置过期时间</td>
+          <td style="text-align: center"><code>EXPIREa10</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">EXPIREAT</td>
+          <td style="text-align: center">用于为key设置过期时间，接受的时间参数是UNIX时间戳</td>
+          <td style="text-align: center"><code>EXPIREATa1293840000</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">PEXPIRE</td>
+          <td style="text-align: center">设置key的过期时间，以毫秒计</td>
+          <td style="text-align: center"><code>PEXPIREa1000</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">PEXPIREAT</td>
+          <td style="text-align: center">设置key过期时间的时间戳(unixtimestamp)，以毫秒计</td>
+          <td style="text-align: center"><code>PEXPIREATa1555555555005</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">KEYS</td>
+          <td style="text-align: center">查找所有符合给定模式的key</td>
+          <td style="text-align: center"><code>KEYS*</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">MOVE</td>
+          <td style="text-align: center">将当前数据库的key移动到给定的数据库中</td>
+          <td style="text-align: center"><code>MOVEa1</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">PERSIST</td>
+          <td style="text-align: center">删除给定key的过期时间，使得key永不过期</td>
+          <td style="text-align: center"><code>PERSISTa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">PTTL</td>
+          <td style="text-align: center">以毫秒为单位返回key的剩余的过期时间</td>
+          <td style="text-align: center"><code>PTTLa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">TTL</td>
+          <td style="text-align: center">以秒为单位，返回给定key的剩余生存时间</td>
+          <td style="text-align: center"><code>TTLa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">RANDOMKEY</td>
+          <td style="text-align: center">从当前数据库中随机返回一个key</td>
+          <td style="text-align: center"><code>RANDOMKEY</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">RENAME</td>
+          <td style="text-align: center">修改key的名称</td>
+          <td style="text-align: center"><code>RENAMEab</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">RENAMENX</td>
+          <td style="text-align: center">当newkey不存在时，将key改名为newkey</td>
+          <td style="text-align: center"><code>RENAMENXab</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">TYPE</td>
+          <td style="text-align: center">返回key所储存的值的类型</td>
+          <td style="text-align: center"><code>TYPEa</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="字符串strings-1">字符串（Strings）</h3>
+<p>字符串相关的命令如下：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">命令</th>
+          <th style="text-align: center">描述</th>
+          <th style="text-align: center">举例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">SET</td>
+          <td style="text-align: center">设置指定key的值</td>
+          <td style="text-align: center"><code>SETaabcd</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">GET</td>
+          <td style="text-align: center">获取指定key的值</td>
+          <td style="text-align: center"><code>GETa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">GETRANGE</td>
+          <td style="text-align: center">返回key中字符串值，并切片得到子字符</td>
+          <td style="text-align: center"><code>GETRANGEa02</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">GETSET</td>
+          <td style="text-align: center">将给定key的值设为value，并返回key的旧值(oldvalue)</td>
+          <td style="text-align: center"><code>GETSETaqwer</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">MGET</td>
+          <td style="text-align: center">获取所有(一个或多个)给定key的值</td>
+          <td style="text-align: center"><code>MGETabcd</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SETEX</td>
+          <td style="text-align: center">设置key的值为value同时将过期时间设为seconds</td>
+          <td style="text-align: center"><code>SETEXa10aaa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SETNX</td>
+          <td style="text-align: center">只有在key不存在时设置key的值</td>
+          <td style="text-align: center"><code>SETNXaaaaaa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">STRLEN</td>
+          <td style="text-align: center">返回key所储存的字符串值的长度</td>
+          <td style="text-align: center"><code>STRLENa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">MSET</td>
+          <td style="text-align: center">同时设置一个或多个key-value对</td>
+          <td style="text-align: center"><code>MSETaaabbbccc</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">MSETNX</td>
+          <td style="text-align: center">同时设置一个或多个key-value对，仅不存在时生效</td>
+          <td style="text-align: center"><code>MSETNXaaabbbccc</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">PSETEX</td>
+          <td style="text-align: center">以毫秒为单位设置key的生存时间</td>
+          <td style="text-align: center"><code>PSETEXa10aaa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">INCR</td>
+          <td style="text-align: center">将key中储存的数字值增一</td>
+          <td style="text-align: center"><code>INCRnum</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">INCRBY</td>
+          <td style="text-align: center">将key所储存的值加上给定的增量值(increment)</td>
+          <td style="text-align: center"><code>INCRBYnum2</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">INCRBYFLOAT</td>
+          <td style="text-align: center">将key所储存的值加上给定的浮点增量值(increment)</td>
+          <td style="text-align: center"><code>INCRBYFLOATnum1.5</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">DECR</td>
+          <td style="text-align: center">将key中储存的数字值减一</td>
+          <td style="text-align: center"><code>DECRnum</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">DECRBY</td>
+          <td style="text-align: center">将key所储存的值减去给定的减量值(decrement)</td>
+          <td style="text-align: center"><code>DECRBYnum2</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">APPEND</td>
+          <td style="text-align: center">将value追加到key原来的值的末尾</td>
+          <td style="text-align: center"><code>APPENDnumaa</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="列表lists-1">列表（lists）</h3>
+<p>列表相关的命令如下：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">命令</th>
+          <th style="text-align: center">描述</th>
+          <th style="text-align: center">举例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">BLPOP</td>
+          <td style="text-align: center">移出并获取列表的第一个元素（阻塞式）</td>
+          <td style="text-align: center"><code>BLPOPa10</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">BRPOP</td>
+          <td style="text-align: center">移出并获取列表的最后一个元素（阻塞式）</td>
+          <td style="text-align: center"><code>BRPOPa10</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">BRPOPLPUSH</td>
+          <td style="text-align: center">从列表中弹出一个值，并将该值插入到另外一个列表中并返回它（阻塞式）</td>
+          <td style="text-align: center"><code>BRPOPLPUSHab10</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">LINDEX</td>
+          <td style="text-align: center">通过索引获取列表中的元素</td>
+          <td style="text-align: center"><code>LINDEXa2</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">LINSERT</td>
+          <td style="text-align: center">在列表的元素前或者后插入元素</td>
+          <td style="text-align: center"><code>LINSERTaBEFOREax</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">LLEN</td>
+          <td style="text-align: center">获取列表长度</td>
+          <td style="text-align: center"><code>LLENa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">LPOP</td>
+          <td style="text-align: center">移出并获取列表的第一个元素</td>
+          <td style="text-align: center"><code>LPOPa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">LPUSH</td>
+          <td style="text-align: center">将一个或多个值插入到列表头部</td>
+          <td style="text-align: center"><code>LPUSHaabc</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">LPUSHX</td>
+          <td style="text-align: center">将一个值插入到已存在的列表头部</td>
+          <td style="text-align: center"><code>LPUSHXaq</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">LRANGE</td>
+          <td style="text-align: center">获取列表指定范围内的元素</td>
+          <td style="text-align: center"><code>LRANGEa24</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">LREM</td>
+          <td style="text-align: center">移除列表元素</td>
+          <td style="text-align: center"><code>LREMa0a</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">LSET</td>
+          <td style="text-align: center">通过索引设置列表元素的值</td>
+          <td style="text-align: center"><code>LSETa2ee</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">LTRIM</td>
+          <td style="text-align: center">对一个列表进行修剪(trim)</td>
+          <td style="text-align: center"><code>LTRIMa24</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">RPOP</td>
+          <td style="text-align: center">移除并获取列表最后一个元素</td>
+          <td style="text-align: center"><code>RPOPa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">RPOPLPUSH</td>
+          <td style="text-align: center">移除列表的最后一个元素，并将该元素添加到另一个列表并返回</td>
+          <td style="text-align: center"><code>RPOPLPUSHab</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">RPUSH</td>
+          <td style="text-align: center">在列表中添加一个或多个值</td>
+          <td style="text-align: center"><code>RPUSHaqq</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">RPUSHX</td>
+          <td style="text-align: center">为已存在的列表添加值</td>
+          <td style="text-align: center"><code>RPUSHXaqq</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="集合sets-1">集合（sets）</h3>
+<p>集合相关的命令如下：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">命令</th>
+          <th style="text-align: center">描述</th>
+          <th style="text-align: center">举例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">SADD</td>
+          <td style="text-align: center">向集合添加一个或多个成员</td>
+          <td style="text-align: center"><code>SADDaabcda</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SCARD</td>
+          <td style="text-align: center">获取集合的成员数</td>
+          <td style="text-align: center"><code>SCARDa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SDIFF</td>
+          <td style="text-align: center">返回给定所有集合的差集</td>
+          <td style="text-align: center"><code>SDIFFab</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SDIFFSTORE</td>
+          <td style="text-align: center">返回给定所有集合的差集并存储在destination中</td>
+          <td style="text-align: center"><code>SDIFFSTOREcab</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SINTER</td>
+          <td style="text-align: center">返回给定所有集合的交集</td>
+          <td style="text-align: center"><code>SINTERab</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SINTERSTORE</td>
+          <td style="text-align: center">返回给定所有集合的交集并存储在destination中</td>
+          <td style="text-align: center"><code>SINTERSTOREcab</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SISMEMBER</td>
+          <td style="text-align: center">判断member元素是否是集合key的成员</td>
+          <td style="text-align: center"><code>SISMEMBERad</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SMEMBERS</td>
+          <td style="text-align: center">返回集合中的所有成员</td>
+          <td style="text-align: center"><code>SMEMBERSa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SMOVE</td>
+          <td style="text-align: center">将member元素从source集合移动到destination集合</td>
+          <td style="text-align: center"><code>SMOVEabc</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SPOP</td>
+          <td style="text-align: center">移除并返回集合中的一个随机元素</td>
+          <td style="text-align: center"><code>SPOPa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SRANDMEMBER</td>
+          <td style="text-align: center">返回集合中一个或多个随机数</td>
+          <td style="text-align: center"><code>SRANDMEMBERa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SREM</td>
+          <td style="text-align: center">移除集合中一个或多个成员</td>
+          <td style="text-align: center"><code>SREMab</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SUNION</td>
+          <td style="text-align: center">返回所有给定集合的并集</td>
+          <td style="text-align: center"><code>SUNIONab</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SUNIONSTORE</td>
+          <td style="text-align: center">所有给定集合的并集存储在destination集合中</td>
+          <td style="text-align: center"><code>SUNIONSTOREcab</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SSCAN</td>
+          <td style="text-align: center">迭代集合中的元素</td>
+          <td style="text-align: center"><code>SSCAN0MATCH*</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="哈希hashs">哈希（hashs）</h3>
+<p>集合相关的命令如下：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">命令</th>
+          <th style="text-align: center">描述</th>
+          <th style="text-align: center">举例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">HDEL</td>
+          <td style="text-align: center">删除一个或多个哈希表字段</td>
+          <td style="text-align: center"><code>HDELaa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">HEXISTS</td>
+          <td style="text-align: center">查看哈希表key中，指定的字段是否存在</td>
+          <td style="text-align: center"><code>HEXISTSaac</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">HGET</td>
+          <td style="text-align: center">获取存储在哈希表中指定字段的值</td>
+          <td style="text-align: center"><code>HGETaac</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">HGETALL</td>
+          <td style="text-align: center">获取在哈希表中指定key的所有字段和值</td>
+          <td style="text-align: center"><code>HGETALLaa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">HINCRBY</td>
+          <td style="text-align: center">为哈希表key中的指定字段的整数值加上增量increment</td>
+          <td style="text-align: center"><code>HINCRBYaab1</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">HINCRBYFLOAT</td>
+          <td style="text-align: center">为哈希表key中的指定字段的浮点数值加上增量increment</td>
+          <td style="text-align: center"><code>HINCRBYFLOATaab1.5</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">HKEYS</td>
+          <td style="text-align: center">获取所有哈希表中的字段</td>
+          <td style="text-align: center"><code>HKEYSaa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">HLEN</td>
+          <td style="text-align: center">获取哈希表中字段的数量</td>
+          <td style="text-align: center"><code>HLENaa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">HMGET</td>
+          <td style="text-align: center">获取所有给定字段的值</td>
+          <td style="text-align: center"><code>HMGETabcc</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">HMSET</td>
+          <td style="text-align: center">同时将多个field-value(域-值)对设置到哈希表key中</td>
+          <td style="text-align: center"><code>HMSETaaaaabbbccc</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">HSET</td>
+          <td style="text-align: center">将哈希表key中的字段field的值设为value</td>
+          <td style="text-align: center"><code>HSETaaaa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">HSETNX</td>
+          <td style="text-align: center">只有在字段field不存在时，设置哈希表字段的值</td>
+          <td style="text-align: center"><code>HSETNXaaaaa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">HVALS</td>
+          <td style="text-align: center">获取哈希表中所有值</td>
+          <td style="text-align: center"><code>HVALSaa</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">HSCAN</td>
+          <td style="text-align: center">迭代哈希表中的键值对</td>
+          <td style="text-align: center"><code>HSCANaa0matchaCOUNT2</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">HSTRLEN</td>
+          <td style="text-align: center">返回哈希表key中，与给定域field相关联的值的字符串长度</td>
+          <td style="text-align: center"><code>HSTRLENaab</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="有序集合sorted-sets-1">有序集合（sorted sets）</h3>
+<p>集合相关的命令如下：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">命令</th>
+          <th style="text-align: center">描述</th>
+          <th style="text-align: center">举例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">ZADD</td>
+          <td style="text-align: center">向有序集合添加一个或多个成员，或者更新已存在成员的分数</td>
+          <td style="text-align: center"><code>ZADDx100v1</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZCARD</td>
+          <td style="text-align: center">获取有序集合的成员数</td>
+          <td style="text-align: center"><code>ZCARDx</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZCOUNT</td>
+          <td style="text-align: center">计算在有序集合中指定区间分数的成员数</td>
+          <td style="text-align: center"><code>ZCOUNT80100</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZINCRBY</td>
+          <td style="text-align: center">有序集合中对指定成员的分数加上增量increment</td>
+          <td style="text-align: center"><code>ZINCRBYx10v1</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZINTERSTORE</td>
+          <td style="text-align: center">计算给定的一个或多个有序集的交集并将结果集存储在新的有序集合key中</td>
+          <td style="text-align: center"><code>ZINTERSTOREq2xxx</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZLEXCOUNT</td>
+          <td style="text-align: center">在有序集合中计算指定字典区间内成员数量</td>
+          <td style="text-align: center"><code>ZLEXCOUNTx-+</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZRANGE</td>
+          <td style="text-align: center">通过索引区间返回有序集合成指定区间内的成员</td>
+          <td style="text-align: center"><code>ZRANGEx02</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZRANGEBYLEX</td>
+          <td style="text-align: center">通过字典区间返回有序集合的成员</td>
+          <td style="text-align: center"><code>ZRANGEBYLEXx[v1[v2</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZRANGEBYSCORE</td>
+          <td style="text-align: center">通过分数返回有序集合指定区间内的成员</td>
+          <td style="text-align: center"><code>ZRANGEBYSCOREx101200</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZRANK</td>
+          <td style="text-align: center">返回有序集合中指定成员的索引</td>
+          <td style="text-align: center"><code>ZRANKxv1</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZREM</td>
+          <td style="text-align: center">移除有序集合中的一个或多个成员</td>
+          <td style="text-align: center"><code>ZREMxxv1</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZREMRANGEBYLEX</td>
+          <td style="text-align: center">移除有序集合中给定的字典区间的所有成员</td>
+          <td style="text-align: center"><code>ZREMRANGEBYLEXxx[v1[v2</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZREMRANGEBYRANK</td>
+          <td style="text-align: center">移除有序集合中给定的排名区间的所有成员</td>
+          <td style="text-align: center"><code>ZREMRANGEBYRANKxx020</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZREMRANGEBYSCORE</td>
+          <td style="text-align: center">移除有序集合中给定的分数区间的所有成员</td>
+          <td style="text-align: center"><code>ZREMRANGEBYSCORExx2030</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZREVRANGE</td>
+          <td style="text-align: center">返回有序集中指定区间内的成员，通过索引，分数从高到底</td>
+          <td style="text-align: center"><code>ZREVRANGEx010</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZREVRANGEBYSCORE</td>
+          <td style="text-align: center">返回有序集中指定分数区间内的成员，分数从高到低排序</td>
+          <td style="text-align: center"><code>ZREVRANGEBYSCOREx20120</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZREVRANK</td>
+          <td style="text-align: center">返回有序集合中指定成员的排名，有序集成员按分数值递减(从大到小)排序</td>
+          <td style="text-align: center"><code>ZREVRANKxv2</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZSCORE</td>
+          <td style="text-align: center">返回有序集中，成员的分数值</td>
+          <td style="text-align: center"><code>ZSCORExv1</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZUNIONSTORE</td>
+          <td style="text-align: center">计算一个或多个有序集的并集，并存储在新的key中</td>
+          <td style="text-align: center"><code>ZUNIONSTOREz2xxx</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZSCAN</td>
+          <td style="text-align: center">迭代有序集合中的元素（包括元素成员和元素分值）</td>
+          <td style="text-align: center"><code>ZSCANx0</code></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://www.redis.com.cn/tutorial.html">https://www.redis.com.cn/tutorial.html</a></li>
+<li><a href="https://redis.io/docs/getting-started/">https://redis.io/docs/getting-started/</a></li>
+</ul>
+
+                </div>
+
+                <div class="row middle-xs">
+                    <div class="col-xs-12">
+                        
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-xs-12">
+                        
+                    </div>
+                </div>
+
+                
+
+
+
+                
+                
+                <div style="height: 50px;"></div>
+                
+                
+
+                <div class="site-footer">
+  
+  
+</div>
+
+            </div>
+        </div>
+    </article>
+
+    
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/zoom.min.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+<script>
+  
+  
+    
+    
+  
+</script>
+
+    
+
+</body>
+
+</html>

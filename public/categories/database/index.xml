@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Database on LiDongchao</title>
+    <link>https://li-dong-chao.github.io/categories/database/</link>
+    <description>Recent content in Database on LiDongchao</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 01 May 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://li-dong-chao.github.io/categories/database/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mysql8.0的安装</title>
+      <link>https://li-dong-chao.github.io/posts/mysql%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Mon, 01 May 2023 00:00:00 +0000</pubDate>
+      <guid>https://li-dong-chao.github.io/posts/mysql%E5%AE%89%E8%A3%85/</guid>
+      <description>&lt;p&gt;本文主要介绍如何采用zip安装包的形式在win10系统上安装mysql8.0。&lt;/p&gt;&#xA;&lt;h2 id=&#34;下载&#34;&gt;下载&lt;/h2&gt;&#xA;&lt;p&gt;在正式安装之前，需要从&lt;a href=&#34;https://dev.mysql.com/downloads/mysql/&#34;&gt;官网&lt;/a&gt;下载zip格式的mysql安装包。&lt;/p&gt;&#xA;&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;设置环境变量&lt;/li&gt;&#xA;&lt;li&gt;打开以管理员身份运行cmd&lt;/li&gt;&#xA;&lt;li&gt;运行命令 &lt;code&gt;mysqld --initialize-insecure&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;安装mysql服务 &lt;code&gt;mysqld install&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;运行mysql服务 &lt;code&gt;net start mysql&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;此时mysql已经安装完成，登录的密码可以在 &lt;code&gt;mysql根目录\data\&lt;/code&gt; 的err格式文件中查看。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

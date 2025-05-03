@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>算法 on LiDongchao</title>
+    <link>https://li-dong-chao.github.io/tags/%E7%AE%97%E6%B3%95/</link>
+    <description>Recent content in 算法 on LiDongchao</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 06 Apr 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://li-dong-chao.github.io/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>线性回归</title>
+      <link>https://li-dong-chao.github.io/posts/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link>
+      <pubDate>Sat, 06 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>https://li-dong-chao.github.io/posts/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</guid>
+      <description>&lt;p&gt;线性回归是最基础的机器学习模型，也是最经典的回归算法，可以用来解决许多连续变量的预测问题。&lt;/p&gt;&#xA;&lt;h2 id=&#34;模型介绍&#34;&gt;模型介绍&lt;/h2&gt;&#xA;&lt;p&gt;假设现在存在 $n$ 个样本 $D={ (\boldsymbol {x_1}, y_1), (\boldsymbol{x_2}, y_2), \cdots, (\boldsymbol{x_n}, y_n) }$ ，其中 $\boldsymbol{x_i}$ 是一个 $p$ 维向量，即 $\boldsymbol{x_i} = [x_{i,1}, x_{i,2},\cdots,x_{i,p}]$ ，$y_i$ 是一个标量，这里 $i\in{1,\cdots,n}$.&lt;/p&gt;&#xA;&lt;p&gt;线性模型假设因变量 $y$ 和自变量 $\boldsymbol{x}$  之间存在线性关系，即&#xA;$$&#xA;y=\boldsymbol{w}\boldsymbol{x}+\sigma&#xA;$$&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>感知机</title>
+      <link>https://li-dong-chao.github.io/posts/%E6%84%9F%E7%9F%A5%E6%9C%BA/</link>
+      <pubDate>Thu, 05 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>https://li-dong-chao.github.io/posts/%E6%84%9F%E7%9F%A5%E6%9C%BA/</guid>
+      <description>&lt;p&gt;感知机模型是一种线性二分类判别分类模型，它根据输入的样本的特征向量，输出样本的类型。&lt;/p&gt;&#xA;&lt;p&gt;感知机模型假设输入数据是线性可分，其学习的目标为找到一个线性分离超平面，从而实现对样本的正确分类。&lt;/p&gt;&#xA;&lt;p&gt;感知机具有简单、基于实现的优点，分为原始形式和对偶形式，是神经网络和支持向量机的基础。&lt;/p&gt;&#xA;&lt;h2 id=&#34;感知机模型&#34;&gt;感知机模型&lt;/h2&gt;&#xA;&lt;p&gt;假设输入空间为 $\mathcal{X} \subseteq R^n$ ，输出空间为 $\mathcal{y} = {+1, -1}$ 。&#xA;输入 $x \in \mathcal{X}$ 表示样本的特征向量，表示输入空间中的样本点。&#xA;输出 $y \in \mathcal{Y}$ 表示样本的类别。&#xA;则感知机可用下面的函数表示：&lt;/p&gt;&#xA;&lt;p&gt;$$&#xA;f(x) = sign(w \cdot x + b)&#xA;$$&lt;/p&gt;&#xA;&lt;p&gt;其中，$w$ 和 $b$ 是感知机模型的参数，&#xA;$w \in R^n$ 称为权值，在一定程度上反映了各个特征向量的重要程度，&#xA;$b \in R$ 称为偏置。&#xA;公式中的点表示内积，sign为符号函数，即&lt;/p&gt;&#xA;&lt;p&gt;$$&#xA;sign(x) = \begin{cases}&#xA;+1,&amp;amp; x \ge 0\\&#xA;-1,&amp;amp; x \lt 0&#xA;\end{cases}&#xA;$$&lt;/p&gt;&#xA;&lt;p&gt;感知机模型的假设空间是定义在特征空间中的所有线性分类模型，&#xA;即函数集合 ${f| f(x) = w \cdot x + b}$ 。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

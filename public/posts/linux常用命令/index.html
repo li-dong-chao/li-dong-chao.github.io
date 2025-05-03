@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.147.1">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="" />
+  <meta property="og:url" content="https://li-dong-chao.github.io/posts/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" />
+  <link rel="canonical" href="https://li-dong-chao.github.io/posts/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" /><link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.svg" />
+  <link rel="shortcut" href="/favicon.svg" /><link rel="alternate" type="application/atom+xml" href="https://li-dong-chao.github.io/index.xml" title="LiDongchao">
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/li-dong-chao.github.io\/"
+      },
+      "articleSection" : "posts",
+      "name" : "linux常用命令",
+      "headline" : "linux常用命令",
+      "description" : "ln ln命令可以用来创建链接，包括 软链接 和 硬链接 。\n软链接与硬链接概念明晰 在介绍这两个概念之前，需要先说一下 索引节点 这个概念。\nlinux下“一切皆文件”，系统会给所有保存在磁盘中的文件分配一个编号，这个编号就是 索引节点编号 ， 它是文件或者目录在linux系统下的唯一标识。\nlinux允许多个文件名同时指向一个索引节点，这种情况就是硬链接。 通俗的说，就是假设现在存在一个文件 A ，为了防止文件被误删，我又创建一个文件 B ， 并让 B 的索引节点编号和 A 的索引节点编号相同，此时 B 就是 A 的硬链接， 更准确的说是两者互为对方的硬链接。\n使用硬链接可以有效的防止文件误删，但是有以下需要注意的地方：\n删除硬链接文件或者删除源文件任意之一，文件实体并不会被删除，只有删除了源文件和所有对应的硬链接文件，文件实体才会被删除； 硬链接文件删除方式与普通文件相同，使用rm命令即可删除； 对于静态文件（没有进程正在调用），当硬链接数为0时文件就被删除。注意：如果有进程正在调用，则无法删除或者即使文件名被删除但空间不会释放； 不能对目录创建硬链接，不能对不同文件系统创建硬链接，不能对不存在的文件创建硬链接。 软链接的概念理解起来就相对容易一些，它和windows下的快捷方式类似。 软连接是一个普通文件，不过该文件记录了其源文件的路径指向，根据记录的内容，软连接可以快速定位到其源文件。\n关于这两个概念，这里提供两篇文章，方便更好的理解。\nhttps:\/\/xzchsia.github.io\/2020\/03\/05\/linux-hard-soft-link\/ https:\/\/blog.csdn.net\/LEON1741\/article\/details\/100136449 ln用法 1ln 参数 源文件 目标文件 注意：\n如果不加参数，则创建的是硬链接 源目录和目标目录都必须是 绝对路径 常用的参数如下：\n-i: 交互模式，文件存在则提示用户是否覆盖 -s: 软链接（符号链接） -d: 允许超级用户制作目录的硬链接 -b: 删除，覆盖以前建立的链接 -f: 强制执行 -n: 把符号链接视为一般目录 -v: 显示详细的处理过程 使用场景举例 安装python到 \/usr\/local\/python 目录下，由于该目录不是全局环境变量，因此无法全局使用 python3 命令。 可以使用 ln 命令创建一个软链接到 \/usr\/bin 目录下，这样便可以全局使用 python3 命令了。\n",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2023",
+      "datePublished": "2023-10-01 00:00:00 \u002b0000 UTC",
+      "dateModified" : "2023-10-01 00:00:00 \u002b0000 UTC",
+      "url" : "https:\/\/li-dong-chao.github.io\/posts\/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>linux常用命令</title>
+  <meta property="og:title" content="linux常用命令" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="ln ln命令可以用来创建链接，包括 软链接 和 硬链接 。
+软链接与硬链接概念明晰 在介绍这两个概念之前，需要先说一下 索引节点 这个概念。
+linux下“一切皆文件”，系统会给所有保存在磁盘中的文件分配一个编号，这个编号就是 索引节点编号 ， 它是文件或者目录在linux系统下的唯一标识。
+linux允许多个文件名同时指向一个索引节点，这种情况就是硬链接。 通俗的说，就是假设现在存在一个文件 A ，为了防止文件被误删，我又创建一个文件 B ， 并让 B 的索引节点编号和 A 的索引节点编号相同，此时 B 就是 A 的硬链接， 更准确的说是两者互为对方的硬链接。
+使用硬链接可以有效的防止文件误删，但是有以下需要注意的地方：
+删除硬链接文件或者删除源文件任意之一，文件实体并不会被删除，只有删除了源文件和所有对应的硬链接文件，文件实体才会被删除； 硬链接文件删除方式与普通文件相同，使用rm命令即可删除； 对于静态文件（没有进程正在调用），当硬链接数为0时文件就被删除。注意：如果有进程正在调用，则无法删除或者即使文件名被删除但空间不会释放； 不能对目录创建硬链接，不能对不同文件系统创建硬链接，不能对不存在的文件创建硬链接。 软链接的概念理解起来就相对容易一些，它和windows下的快捷方式类似。 软连接是一个普通文件，不过该文件记录了其源文件的路径指向，根据记录的内容，软连接可以快速定位到其源文件。
+关于这两个概念，这里提供两篇文章，方便更好的理解。
+https://xzchsia.github.io/2020/03/05/linux-hard-soft-link/ https://blog.csdn.net/LEON1741/article/details/100136449 ln用法 1ln 参数 源文件 目标文件 注意：
+如果不加参数，则创建的是硬链接 源目录和目标目录都必须是 绝对路径 常用的参数如下：
+-i: 交互模式，文件存在则提示用户是否覆盖 -s: 软链接（符号链接） -d: 允许超级用户制作目录的硬链接 -b: 删除，覆盖以前建立的链接 -f: 强制执行 -n: 把符号链接视为一般目录 -v: 显示详细的处理过程 使用场景举例 安装python到 /usr/local/python 目录下，由于该目录不是全局环境变量，因此无法全局使用 python3 命令。 可以使用 ln 命令创建一个软链接到 /usr/bin 目录下，这样便可以全局使用 python3 命令了。
+" />
+  <meta name="description" content="ln ln命令可以用来创建链接，包括 软链接 和 硬链接 。
+软链接与硬链接概念明晰 在介绍这两个概念之前，需要先说一下 索引节点 这个概念。
+linux下“一切皆文件”，系统会给所有保存在磁盘中的文件分配一个编号，这个编号就是 索引节点编号 ， 它是文件或者目录在linux系统下的唯一标识。
+linux允许多个文件名同时指向一个索引节点，这种情况就是硬链接。 通俗的说，就是假设现在存在一个文件 A ，为了防止文件被误删，我又创建一个文件 B ， 并让 B 的索引节点编号和 A 的索引节点编号相同，此时 B 就是 A 的硬链接， 更准确的说是两者互为对方的硬链接。
+使用硬链接可以有效的防止文件误删，但是有以下需要注意的地方：
+删除硬链接文件或者删除源文件任意之一，文件实体并不会被删除，只有删除了源文件和所有对应的硬链接文件，文件实体才会被删除； 硬链接文件删除方式与普通文件相同，使用rm命令即可删除； 对于静态文件（没有进程正在调用），当硬链接数为0时文件就被删除。注意：如果有进程正在调用，则无法删除或者即使文件名被删除但空间不会释放； 不能对目录创建硬链接，不能对不同文件系统创建硬链接，不能对不存在的文件创建硬链接。 软链接的概念理解起来就相对容易一些，它和windows下的快捷方式类似。 软连接是一个普通文件，不过该文件记录了其源文件的路径指向，根据记录的内容，软连接可以快速定位到其源文件。
+关于这两个概念，这里提供两篇文章，方便更好的理解。
+https://xzchsia.github.io/2020/03/05/linux-hard-soft-link/ https://blog.csdn.net/LEON1741/article/details/100136449 ln用法 1ln 参数 源文件 目标文件 注意：
+如果不加参数，则创建的是硬链接 源目录和目标目录都必须是 绝对路径 常用的参数如下：
+-i: 交互模式，文件存在则提示用户是否覆盖 -s: 软链接（符号链接） -d: 允许超级用户制作目录的硬链接 -b: 删除，覆盖以前建立的链接 -f: 强制执行 -n: 把符号链接视为一般目录 -v: 显示详细的处理过程 使用场景举例 安装python到 /usr/local/python 目录下，由于该目录不是全局环境变量，因此无法全局使用 python3 命令。 可以使用 ln 命令创建一个软链接到 /usr/bin 目录下，这样便可以全局使用 python3 命令了。
+" />
+  <meta property="og:locale" content="zh-CN" /><meta property="og:image" content="/favicon.svg" />
+  
+
+  
+    <style>body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:#000;text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background-color:#c3c3c3;border-radius:6px}::-webkit-scrollbar-thumb:hover{background-color:#8c8c8c}::-moz-scrollbar{width:6px;height:6px}::-moz-scrollbar-thumb{background-color:#c3c3c3;border-radius:6px}::-moz-scrollbar-thumb:hover{background-color:#8c8c8c}.markdown-body{font-family:source-serif-pro,Georgia,microsoft yahei,Cambria,times new roman,Times,serif;font-size:16px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:#000}.markdown-body blockquote{margin:0;padding:.2em 2em;color:#57606a;border-left:4px solid #4cb3d4;border-radius:6px;background-color:#e6f4ff}.highlight{border-radius:10px}.highlight pre{overflow:scroll;padding:.5em;border-radius:10px}.highlight code{display:inline-block;font-size:13px;font-family:fira code,Consolas,Monaco,andale mono,ubuntu mono,monospace}.highlight{position:relative}.highlight-copy-btn{position:absolute;top:7px;right:7px;border:0;border-radius:4px;padding:1px;font-size:.8em;line-height:1.8;color:#fff;background-color:#777;min-width:55px;text-align:center}.highlight-copy-btn:hover{background-color:#666}table,th,td{border-collapse:collapse;border:2px solid #000}table{margin:1em auto}td{padding:.5em 1em;text-align:center}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:#666}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-line{width:100%;border-width:2px;border-color:#482936;border-style:solid none none none}.lang-switch{font-weight:600}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:#000 2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-content img{max-width:100%;display:block;margin:0 auto;margin-top:12px;border-radius:10px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:#000 2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.related-content{border-width:3px;border-style:solid;border-color:#000;padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:#fff}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{text-align:center}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+  
+  
+    <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+  
+
+  
+
+  <link href="/index.xml" rel="alternate" type="application/rss+xml"
+    title="LiDongchao">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/zoom.css">
+  
+  
+
+  
+  
+</head>
+
+<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+<body>
+    <article class="post " id="article">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="site-header">
+                    
+<header>
+  <div class="header-title">
+    <a href="/"
+      >LiDongchao</a
+    >
+  </div>
+  <div class="header-subtitle">Keep the passion.</div>
+</header>
+<div class="row end-md center-xs header-items">
+  
+  <div class="header-item">
+    <a href="/" target="_self">Home</a>
+  </div>
+  
+  <div class="header-item">
+    <a href="/about" target="_self">About</a>
+  </div>
+  
+</div>
+<div class="row end-xs">
+   
+</div>
+<div class="header-line"></div>
+
+                </div>
+                <header class="post-header">
+                    <h1 class="post-title">linux常用命令</h1>
+                    
+                    <div class="row post-desc">
+                        <div class="col-xs-6">
+                            
+                            <time class="post-date" datetime=" 2023-10-01 00:00:00 UTC">
+                                01 Oct 2023
+                            </time>
+                            
+                        </div>
+                        <div class="col-xs-6">
+                            
+                        </div>
+                    </div>
+                    
+                </header>
+
+                <div class="post-content markdown-body">
+                    
+                    <h2 id="ln">ln</h2>
+<p>ln命令可以用来创建链接，包括 <strong>软链接</strong> 和 <strong>硬链接</strong> 。</p>
+<h3 id="软链接与硬链接概念明晰">软链接与硬链接概念明晰</h3>
+<p>在介绍这两个概念之前，需要先说一下 <strong>索引节点</strong> 这个概念。</p>
+<p>linux下“一切皆文件”，系统会给所有保存在磁盘中的文件分配一个编号，这个编号就是 <strong>索引节点编号</strong> ，
+它是文件或者目录在linux系统下的唯一标识。</p>
+<p>linux允许多个文件名同时指向一个索引节点，这种情况就是硬链接。
+通俗的说，就是假设现在存在一个文件 <code>A</code> ，为了防止文件被误删，我又创建一个文件 <code>B</code> ，
+并让 <code>B</code> 的索引节点编号和 <code>A</code> 的索引节点编号相同，此时 <code>B</code> 就是 <code>A</code> 的硬链接，
+更准确的说是两者互为对方的硬链接。</p>
+<p>使用硬链接可以有效的防止文件误删，但是有以下需要注意的地方：</p>
+<ul>
+<li>删除硬链接文件或者删除源文件任意之一，文件实体并不会被删除，只有删除了源文件和所有对应的硬链接文件，文件实体才会被删除；</li>
+<li>硬链接文件删除方式与普通文件相同，使用rm命令即可删除；</li>
+<li>对于静态文件（没有进程正在调用），当硬链接数为0时文件就被删除。注意：如果有进程正在调用，则无法删除或者即使文件名被删除但空间不会释放；</li>
+<li>不能对目录创建硬链接，不能对不同文件系统创建硬链接，不能对不存在的文件创建硬链接。</li>
+</ul>
+<p>软链接的概念理解起来就相对容易一些，它和windows下的快捷方式类似。
+软连接是一个普通文件，不过该文件记录了其源文件的路径指向，根据记录的内容，软连接可以快速定位到其源文件。</p>
+<p>关于这两个概念，这里提供两篇文章，方便更好的理解。</p>
+<ul>
+<li><a href="https://xzchsia.github.io/2020/03/05/linux-hard-soft-link/">https://xzchsia.github.io/2020/03/05/linux-hard-soft-link/</a></li>
+<li><a href="https://blog.csdn.net/LEON1741/article/details/100136449">https://blog.csdn.net/LEON1741/article/details/100136449</a></li>
+</ul>
+<h3 id="ln用法">ln用法</h3>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>ln 参数 源文件 目标文件
+</span></span></code></pre></div><p>注意：</p>
+<ul>
+<li>如果不加参数，则创建的是硬链接</li>
+<li>源目录和目标目录都必须是 <strong>绝对路径</strong></li>
+</ul>
+<p>常用的参数如下：</p>
+<ul>
+<li><code>-i</code>: 交互模式，文件存在则提示用户是否覆盖</li>
+<li><code>-s</code>: 软链接（符号链接）</li>
+<li><code>-d</code>: 允许超级用户制作目录的硬链接</li>
+<li><code>-b</code>: 删除，覆盖以前建立的链接</li>
+<li><code>-f</code>: 强制执行</li>
+<li><code>-n</code>: 把符号链接视为一般目录</li>
+<li><code>-v</code>: 显示详细的处理过程</li>
+</ul>
+<h3 id="使用场景举例">使用场景举例</h3>
+<p>安装python到 <code>/usr/local/python</code> 目录下，由于该目录不是全局环境变量，因此无法全局使用 <code>python3</code> 命令。
+可以使用 <code>ln</code> 命令创建一个软链接到 <code>/usr/bin</code> 目录下，这样便可以全局使用 <code>python3</code> 命令了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>ln -s /usr/local/python/bin/python3 /usr/bin/python3
+</span></span></code></pre></div><h2 id="source">source</h2>
+<h3 id="用法">用法</h3>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#d0a8ff">source</span> filename
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>. filename  <span style="color:#6c7986"># 也可以直接使用点命令</span>
+</span></span></code></pre></div><p><code>source</code> 命令和 <code>.</code> 命令作用相同，区别在于前者来源于 <code>C Shell</code> ，而后者来源于 <code>Bourne Shell</code> .</p>
+<h3 id="作用">作用</h3>
+<p>source命令的作用的是在当前的bash环境中读取并执行filename中的内容。</p>
+<h3 id="使用场景">使用场景</h3>
+<ul>
+<li>通常用于重新执行刚修改的初始化文档，如 .bash_profile 和 .profile 等。</li>
+<li>需要在当前shell中执行某些命令，或者初始化某些变量。</li>
+</ul>
+<blockquote>
+<p>与 <code>sh</code> 的区别在于： <code>source</code> 是在当前shell中执行，而 <code>sh</code> 会新创建一个shell执行。
+当新创建一个shell时，作用域中的内容会有所不同。</p></blockquote>
+<h2 id="echo">echo</h2>
+<p>使用linux下的 <code>echo</code> 命令可以控制输出文字的颜色，用法如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#d0a8ff">echo</span> -e <span style="color:#fc6a5d">&#34;\033[x;ymtext\033[0m&#34;</span>
+</span></span></code></pre></div><p>解释一下上面的命令。</p>
+<p>首先， <code>echo -e</code> 表示使用 <code>echo</code> 命令输出字符串，
+其中 <code>-e</code> 参数表示启用转义字符，即使用-e选项时，
+若字符串中出现以下字符，将单独进行处理，而不会将它当成一般文字输出。</p>
+<ul>
+<li><code>\a</code>: 发出警告声</li>
+<li><code>\b</code>: 删除前一个字符</li>
+<li><code>\c</code>: 不产生进一步输出 (\c 后面的字符不会输出)</li>
+<li><code>\f</code>: 换行但光标仍旧停留在原来的位置</li>
+<li><code>\n</code>: 换行且光标移至行首</li>
+<li><code>\r</code>: 光标移至行首，但不换行</li>
+<li><code>\t</code>: 插入tab</li>
+<li><code>\v</code>: 与\f相同</li>
+<li><code>\\</code>: 插入\字符</li>
+<li><code>\nnn</code>: 插入 <code>nnn</code> （八进制）所代表的ASCII字符；</li>
+</ul>
+<p><code>\033</code> 引导非常规字符序列，
+<code>m</code> 意味着设置属性然后结束非常规字符序列。</p>
+<p><code>text</code> 即为需要进行特殊显示的字符串。</p>
+<p><code>x</code> 和 <code>y</code> 则表示了不同的显示样式，多个显示样式之间用 <code>;</code> 分割开。</p>
+<p>支持的样式可以分为三大类。</p>
+<ol>
+<li>
+<p>字体颜色</p>
+<ul>
+<li>30: 黑色字</li>
+<li>31: 红色字</li>
+<li>32: 绿色字</li>
+<li>33: 黄色字</li>
+<li>34: 蓝色字</li>
+<li>35: 紫色字</li>
+<li>36: 天蓝字</li>
+<li>37: 白色字</li>
+</ul>
+</li>
+<li>
+<p>背景颜色</p>
+<ul>
+<li>40: 黑底</li>
+<li>41: 红底</li>
+<li>42: 绿底</li>
+<li>43: 黄底</li>
+<li>44: 蓝底</li>
+<li>45: 紫底</li>
+<li>46: 天蓝底</li>
+<li>47: 白底</li>
+</ul>
+</li>
+<li>
+<p>其他控制项</p>
+<ul>
+<li>0: 重置所有属性</li>
+<li>1: 设置高亮度</li>
+<li>4: 下划线</li>
+<li>5: 闪烁</li>
+<li>7: 反显</li>
+<li>8: 消隐</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>这里的分类是笔者为方便记忆理解自己划分的， 从echo的设计上来说，仅仅是不同的数字代表不同的样式而已，并不存在这样的分类。</p></blockquote>
+<p>由于 <code>0</code> 可以重置所有的属性，因此经常会看到<code>echo -e &quot;\033[41;36m something here \033[0m&quot;</code> 这样的命令。
+在输出 <code>something here</code> 之后，会紧跟一个 <code>\033[0m</code> 来清除前面的设置，以确保不会影响后续内容的正常展示。</p>
+<p>使用 <code>echo</code> 命令时，添加 <code>-n</code> 参数表示不换行显示。</p>
+<p>在shell脚本中使用 <code>echo</code> 命令可以实现不同颜色日志的输出，可以参考 <a href="./shell%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A0%81%E6%89%8B%E5%86%8C.md"></a> 的代码。</p>
+<h2 id="sed">sed</h2>
+<p>sed命令是linux系统下常用的一种 <strong>行编辑器</strong> ，与vim打开文件并进行编辑的方式不同，
+sed可以非交互式的实现对文件内容的增删改查处理。
+鉴于sed非交互特性，它经常被写在shell脚本中，以非交互的形式实现对文本文件的增删改查操作。</p>
+<blockquote>
+<p>sed是一种行编辑器，这是指在使用sed进行文本文件处理时，sed会把行看做一个最小的处理单元。</p></blockquote>
+<h3 id="用法-1">用法</h3>
+<p><code>sed</code> 命令的基本用法如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sed [选项] [脚本命令] 文件名
+</span></span></code></pre></div><p>其中支持的选项有：</p>
+<ul>
+<li><code>-e&lt;script&gt;</code>: 该选项会将其后跟的脚本命令添加到已有的命令中；</li>
+<li><code>-f&lt;script&gt;</code>: 该选项会将其后文件中的脚本命令添加到已有的命令中；</li>
+<li><code>-n</code>: 该选项会仅显示发生改动的行，如果不加该选项，会默认输出处理文件的全部内容；</li>
+<li><code>-i</code>: 添加该选项会直接修改文件内容。</li>
+</ul>
+<p>脚本命令定义了对文件的处理方式，脚本文件通过动作参数来标识如何进行处理的，支持的动作有：</p>
+<ul>
+<li>a: 新增，a后面接字串，这些字符串会在当前处理行的下一行出现；</li>
+<li>c: 取代，c后面接字符串，可以取代指定位置的内容；</li>
+<li>d: 删除，删除指定的行；</li>
+<li>i: 插入，i后面接字符串，这些字符串会在当前行的上一行出现；</li>
+<li>p: 打印，将指定的内容打印输出；</li>
+<li>s: 取代，可以通过内容匹配来实现对内容的替换。</li>
+</ul>
+<p>下面逐个说明上述的动作。</p>
+<h4 id="s-取代">s 取代</h4>
+<p>s动作的基本命令格式是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sed [选项] <span style="color:#fc6a5d">&#39;[address]s/pattern/replacement/flags&#39;</span> [文件]
+</span></span></code></pre></div><p>其中，address表示具体要执行操作的行，不写默认全部的行，
+pattern表示要被替换的内容（旧的内容），
+replacement表示要替换为的内容（新的内容），
+flags标记了不同的功能。</p>
+<p>flags不同标记对应的功能说明：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">flags标记</th>
+          <th style="text-align: center">功能</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">n</td>
+          <td style="text-align: center">这里的n是代指一个1~512之间的数字，表示指定要替换的字符串出现第几次时才进行替换</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">g</td>
+          <td style="text-align: center">对数据中所有匹配到的内容进行替换，如果没有该标记，默认只替换第一次匹配到的内容</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">p</td>
+          <td style="text-align: center">打印与替换命令中指定的模式匹配的行</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">w file</td>
+          <td style="text-align: center">将缓冲区中的内容写到指定的 file 文件中，类似另存为</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">&amp;</td>
+          <td style="text-align: center">用正则表达式匹配的内容进行替换</td>
+      </tr>
+  </tbody>
+</table>
+<p>下面通过举例展示s动作的用法。</p>
+<p>要处理的文件为test.txt，该文件内容为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>this is a <span style="color:#d0a8ff">test</span> <span style="color:#d0a8ff">test</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>this is a <span style="color:#d0a8ff">test</span> <span style="color:#d0a8ff">test</span>
+</span></span></code></pre></div><p>执行命令 <code>sed 's/test/new/2' test.txt</code>，输出结果为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>this is a <span style="color:#d0a8ff">test</span> new
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>this is a <span style="color:#d0a8ff">test</span> new
+</span></span></code></pre></div><p>可以看出 <code>2</code> 标记使得每一行的第2个test都改为了new。</p>
+<p>而如果执行命令 <code>sed 's/test/new/g' test.txt</code>，则输出结果为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>this is a new new
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>this is a new new
+</span></span></code></pre></div><p>可以看出 <code>g</code> 标记使得每一行的所有test都改为了new。</p>
+<blockquote>
+<p>注意sed在执行脚本命令时，是以行为单位执行的。
+即会对每一行都执行一遍脚本指令，且脚本指令的作用范围也仅限于每一行。</p></blockquote>
+<p>如果在上面命令的基础上添加 <code>w new.txt</code>，改为 <code>sed 's/test/new/gw new.txt' test.txt</code>，
+那么会在当前目录下重新生成的一个文件 <code>new.txt</code>，其内容为上面命令处理的结果。</p>
+<blockquote>
+<p>如果要替换的内容中存在路径等，可以使用 <code>\</code> 进行转义处理。
+如 <code>sed 's/\/bin\/bash/\/bin\/csh/' /etc/passwd</code></p></blockquote>
+<h4 id="d-删除">d 删除</h4>
+<p>基本格式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sed [选项] &#39;[address]d&#39; [文件]
+</span></span></code></pre></div><p>d动作用法比较简单，这里只给出常见用法的说明。</p>
+<ul>
+<li><code>sed '1d' test.txt</code>: 删除test.txt文件的第1行</li>
+<li><code>sed '3,10d test.txt'</code>: 删除test.txt文件第3行到第10行之间的全部内容</li>
+<li><code>sed '3,$d test.txt'</code>: 删除test.txt文件第3行到最后一行的全部内容</li>
+</ul>
+<h4 id="a-新增--i-插入">a 新增 &amp; i 插入</h4>
+<p>这两个动作的用法基本完全相同，区别在a会添加在当前处理行的下一行，而i会添加在当前行的上一行。</p>
+<p>基本格式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sed [选项] <span style="color:#fc6a5d">&#39;[address]a\content&#39;</span> [文件]
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>sed [选项] <span style="color:#fc6a5d">&#39;[address]i\content&#39;</span> [文件]
+</span></span></code></pre></div><p>同样的，下面也是给出常见用法的说明。</p>
+<ul>
+<li><code>sed 'anew line' test.txt</code>: 在test.txt文件的每一行 <strong>下面</strong> 都增加一行，且新增加行的内容为new line</li>
+<li><code>sed 'inew line' test.txt</code>: 在test.txt文件的每一行 <strong>上面</strong> 都增加一行，且新增加行的内容为new line</li>
+<li><code>sed '1anew line' test.txt</code>: 在test.txt文件的第1行 <strong>下面</strong> 都增加一行，且新增加行的内容为new line</li>
+</ul>
+<blockquote>
+<p>如果你想添加多行文本，可以参考下面的代码。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sed <span style="color:#fc6a5d">&#39;1i\
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#fc6a5d">&gt; newline1\
+</span></span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span><span style="color:#fc6a5d">&gt; newline2&#39;</span> test.txt
+</span></span></code></pre></div><p>注意在添加多行时，除最后一行外每行的结尾都是 <code>\</code>.</p></blockquote>
+<h4 id="c-取代">c 取代</h4>
+<p><code>c</code> 的用法与 <code>a</code> 、 <code>i</code> 、 <code>d</code> 大致类似。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>sed [选项] <span style="color:#fc6a5d">&#39;[address]c\content&#39;</span> [文件]
+</span></span></code></pre></div><ul>
+<li><code>sed '3c\changeline' test.txt</code>: 修改第3行为changeline</li>
+</ul>
+<blockquote>
+<p>如果使用命令 <code>sed '1,3c\changeline' test.txt</code>，并不会把第1行到第3行的每一行都换为changeline，而是会把第1行到第3行整个替换为一个changeline。</p></blockquote>
+
+                </div>
+
+                <div class="row middle-xs">
+                    <div class="col-xs-12">
+                        
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-xs-12">
+                        
+                    </div>
+                </div>
+
+                
+
+
+
+                
+                
+                <div style="height: 50px;"></div>
+                
+                
+
+                <div class="site-footer">
+  
+  
+</div>
+
+            </div>
+        </div>
+    </article>
+
+    
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/zoom.min.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+<script>
+  
+  
+    
+    
+  
+</script>
+
+    
+
+</body>
+
+</html>

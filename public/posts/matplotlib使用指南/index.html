@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.147.1">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="" />
+  <meta property="og:url" content="https://li-dong-chao.github.io/posts/matplotlib%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" />
+  <link rel="canonical" href="https://li-dong-chao.github.io/posts/matplotlib%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" /><link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.svg" />
+  <link rel="shortcut" href="/favicon.svg" /><link rel="alternate" type="application/atom+xml" href="https://li-dong-chao.github.io/index.xml" title="LiDongchao">
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/li-dong-chao.github.io\/"
+      },
+      "articleSection" : "posts",
+      "name" : "matplotlib绘图指南",
+      "headline" : "matplotlib绘图指南",
+      "description" : "介绍 matplotlib是一款非常优秀的python绘图工具，大家在使用python仅绘图时，大部分情况下应该都会想到使用该工具进行绘图，但是matplotlib参数众多，画简单的图像可以通过搜索的方式来画出，但是想要画出一张比较复杂的图像，还是有一定门槛的，本文将对matplotlib的绘图做一些介绍说明，希望对大家有所帮助。\n安装 matplotlib的安装非常简单，直接使用pip工具安装即可。\n1pip install matplotlib 除了使用pip工具直接安装外，还可以通过conda、源码安装等方式安装matplotlib，关于更多的安装方法，可以参考这里。\nmatplotlib 组件 在具体介绍 matplotlib 中各个组件之前，先贴一张官方的介绍图片。\n这张图片清楚的标识出了一幅图像中的各个组成部分。在 matplotlib 中，一幅图像中最核心的元素主要有两个，分别是 Figure 和 Axes。\nmatplotlib 图像的所有元素都位于一个 Figure 对象中，可以把它理解一个最大的容器，用于记录图像中所有元素的信息。一个 Figure 中可以包含多个 Axes，每个 Axes 可以理解为一个子图，它记录了一个子图中的所有元素，包含标题（title）、横纵坐标（axis）、坐标刻度（tick）、横纵坐标标签（label）、图像形状（line, scatter 等）、网格（grid）、边框（spine）、图例（legend）等等。使用 matplotlib 绘图的过程可以简单的理解为由两步构成：\n创建 Figure 对象和 Axes 对象； 使用 Figure 和 Axes 内置的各种方式添加或设置各种元素。 使用下面的代码可以创建 Figure 和 Axes。\n1import matplotlib.pyplot as plt 2import numpy as np 3 4# 创建一个 Figure 对象，使用这种方式创建完成后，Figure 中未添加任何 Axes 5fig = plt.figure() 6# 创建一个 Figure 对象，使用这种方式创建完成后，Figure 中包含一个 Axes 7fig, ax = plt.subplots() 8# 创建一个 Figure 对象，并将其按2行2列的网格结构划分，即包含4个Axes 9fig, axs = plt.subplots(2, 2) 10# 创建一个 Figure 对象，并将其按左侧1个 Axes，右侧上下2个 Axes 的结构划分，即包含3个Axes 11fig, axs = plt.subplot_mosaic([[\u0026#39;left\u0026#39;, \u0026#39;right_top\u0026#39;], 12 [\u0026#39;left\u0026#39;, \u0026#39;right_bottom\u0026#39;]]) 两种接口风格 在正式了解 matplotlib 如何绘制图像之前，有必要先了解一下 matplotlib 代码的两种风格，这对理解查看 matplotlib 代码非常有帮助。\n",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2023",
+      "datePublished": "2023-10-06 00:00:00 \u002b0000 UTC",
+      "dateModified" : "2023-10-06 00:00:00 \u002b0000 UTC",
+      "url" : "https:\/\/li-dong-chao.github.io\/posts\/matplotlib%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>matplotlib绘图指南</title>
+  <meta property="og:title" content="matplotlib绘图指南" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="介绍 matplotlib是一款非常优秀的python绘图工具，大家在使用python仅绘图时，大部分情况下应该都会想到使用该工具进行绘图，但是matplotlib参数众多，画简单的图像可以通过搜索的方式来画出，但是想要画出一张比较复杂的图像，还是有一定门槛的，本文将对matplotlib的绘图做一些介绍说明，希望对大家有所帮助。
+安装 matplotlib的安装非常简单，直接使用pip工具安装即可。
+1pip install matplotlib 除了使用pip工具直接安装外，还可以通过conda、源码安装等方式安装matplotlib，关于更多的安装方法，可以参考这里。
+matplotlib 组件 在具体介绍 matplotlib 中各个组件之前，先贴一张官方的介绍图片。
+这张图片清楚的标识出了一幅图像中的各个组成部分。在 matplotlib 中，一幅图像中最核心的元素主要有两个，分别是 Figure 和 Axes。
+matplotlib 图像的所有元素都位于一个 Figure 对象中，可以把它理解一个最大的容器，用于记录图像中所有元素的信息。一个 Figure 中可以包含多个 Axes，每个 Axes 可以理解为一个子图，它记录了一个子图中的所有元素，包含标题（title）、横纵坐标（axis）、坐标刻度（tick）、横纵坐标标签（label）、图像形状（line, scatter 等）、网格（grid）、边框（spine）、图例（legend）等等。使用 matplotlib 绘图的过程可以简单的理解为由两步构成：
+创建 Figure 对象和 Axes 对象； 使用 Figure 和 Axes 内置的各种方式添加或设置各种元素。 使用下面的代码可以创建 Figure 和 Axes。
+1import matplotlib.pyplot as plt 2import numpy as np 3 4# 创建一个 Figure 对象，使用这种方式创建完成后，Figure 中未添加任何 Axes 5fig = plt.figure() 6# 创建一个 Figure 对象，使用这种方式创建完成后，Figure 中包含一个 Axes 7fig, ax = plt.subplots() 8# 创建一个 Figure 对象，并将其按2行2列的网格结构划分，即包含4个Axes 9fig, axs = plt.subplots(2, 2) 10# 创建一个 Figure 对象，并将其按左侧1个 Axes，右侧上下2个 Axes 的结构划分，即包含3个Axes 11fig, axs = plt.subplot_mosaic([[&#39;left&#39;, &#39;right_top&#39;], 12 [&#39;left&#39;, &#39;right_bottom&#39;]]) 两种接口风格 在正式了解 matplotlib 如何绘制图像之前，有必要先了解一下 matplotlib 代码的两种风格，这对理解查看 matplotlib 代码非常有帮助。
+" />
+  <meta name="description" content="介绍 matplotlib是一款非常优秀的python绘图工具，大家在使用python仅绘图时，大部分情况下应该都会想到使用该工具进行绘图，但是matplotlib参数众多，画简单的图像可以通过搜索的方式来画出，但是想要画出一张比较复杂的图像，还是有一定门槛的，本文将对matplotlib的绘图做一些介绍说明，希望对大家有所帮助。
+安装 matplotlib的安装非常简单，直接使用pip工具安装即可。
+1pip install matplotlib 除了使用pip工具直接安装外，还可以通过conda、源码安装等方式安装matplotlib，关于更多的安装方法，可以参考这里。
+matplotlib 组件 在具体介绍 matplotlib 中各个组件之前，先贴一张官方的介绍图片。
+这张图片清楚的标识出了一幅图像中的各个组成部分。在 matplotlib 中，一幅图像中最核心的元素主要有两个，分别是 Figure 和 Axes。
+matplotlib 图像的所有元素都位于一个 Figure 对象中，可以把它理解一个最大的容器，用于记录图像中所有元素的信息。一个 Figure 中可以包含多个 Axes，每个 Axes 可以理解为一个子图，它记录了一个子图中的所有元素，包含标题（title）、横纵坐标（axis）、坐标刻度（tick）、横纵坐标标签（label）、图像形状（line, scatter 等）、网格（grid）、边框（spine）、图例（legend）等等。使用 matplotlib 绘图的过程可以简单的理解为由两步构成：
+创建 Figure 对象和 Axes 对象； 使用 Figure 和 Axes 内置的各种方式添加或设置各种元素。 使用下面的代码可以创建 Figure 和 Axes。
+1import matplotlib.pyplot as plt 2import numpy as np 3 4# 创建一个 Figure 对象，使用这种方式创建完成后，Figure 中未添加任何 Axes 5fig = plt.figure() 6# 创建一个 Figure 对象，使用这种方式创建完成后，Figure 中包含一个 Axes 7fig, ax = plt.subplots() 8# 创建一个 Figure 对象，并将其按2行2列的网格结构划分，即包含4个Axes 9fig, axs = plt.subplots(2, 2) 10# 创建一个 Figure 对象，并将其按左侧1个 Axes，右侧上下2个 Axes 的结构划分，即包含3个Axes 11fig, axs = plt.subplot_mosaic([[&#39;left&#39;, &#39;right_top&#39;], 12 [&#39;left&#39;, &#39;right_bottom&#39;]]) 两种接口风格 在正式了解 matplotlib 如何绘制图像之前，有必要先了解一下 matplotlib 代码的两种风格，这对理解查看 matplotlib 代码非常有帮助。
+" />
+  <meta property="og:locale" content="zh-CN" /><meta property="og:image" content="/favicon.svg" />
+  
+
+  
+    <style>body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:#000;text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background-color:#c3c3c3;border-radius:6px}::-webkit-scrollbar-thumb:hover{background-color:#8c8c8c}::-moz-scrollbar{width:6px;height:6px}::-moz-scrollbar-thumb{background-color:#c3c3c3;border-radius:6px}::-moz-scrollbar-thumb:hover{background-color:#8c8c8c}.markdown-body{font-family:source-serif-pro,Georgia,microsoft yahei,Cambria,times new roman,Times,serif;font-size:16px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:#000}.markdown-body blockquote{margin:0;padding:.2em 2em;color:#57606a;border-left:4px solid #4cb3d4;border-radius:6px;background-color:#e6f4ff}.highlight{border-radius:10px}.highlight pre{overflow:scroll;padding:.5em;border-radius:10px}.highlight code{display:inline-block;font-size:13px;font-family:fira code,Consolas,Monaco,andale mono,ubuntu mono,monospace}.highlight{position:relative}.highlight-copy-btn{position:absolute;top:7px;right:7px;border:0;border-radius:4px;padding:1px;font-size:.8em;line-height:1.8;color:#fff;background-color:#777;min-width:55px;text-align:center}.highlight-copy-btn:hover{background-color:#666}table,th,td{border-collapse:collapse;border:2px solid #000}table{margin:1em auto}td{padding:.5em 1em;text-align:center}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:#666}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-line{width:100%;border-width:2px;border-color:#482936;border-style:solid none none none}.lang-switch{font-weight:600}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:#000 2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-content img{max-width:100%;display:block;margin:0 auto;margin-top:12px;border-radius:10px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-tags{display:inline;font-weight:600;padding:2px 5px;margin-right:6px;border:#000 2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.related-content{border-width:3px;border-style:solid;border-color:#000;padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:#fff}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{text-align:center}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+  
+  
+    <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+  
+
+  
+
+  <link href="/index.xml" rel="alternate" type="application/rss+xml"
+    title="LiDongchao">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/zoom.css">
+  
+  
+
+  
+  
+</head>
+
+<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+<body>
+    <article class="post " id="article">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="site-header">
+                    
+<header>
+  <div class="header-title">
+    <a href="/"
+      >LiDongchao</a
+    >
+  </div>
+  <div class="header-subtitle">Keep the passion.</div>
+</header>
+<div class="row end-md center-xs header-items">
+  
+  <div class="header-item">
+    <a href="/" target="_self">Home</a>
+  </div>
+  
+  <div class="header-item">
+    <a href="/about" target="_self">About</a>
+  </div>
+  
+</div>
+<div class="row end-xs">
+   
+</div>
+<div class="header-line"></div>
+
+                </div>
+                <header class="post-header">
+                    <h1 class="post-title">matplotlib绘图指南</h1>
+                    
+                    <div class="row post-desc">
+                        <div class="col-xs-6">
+                            
+                            <time class="post-date" datetime=" 2023-10-06 00:00:00 UTC">
+                                06 Oct 2023
+                            </time>
+                            
+                        </div>
+                        <div class="col-xs-6">
+                            
+                        </div>
+                    </div>
+                    
+                </header>
+
+                <div class="post-content markdown-body">
+                    
+                    <h2 id="介绍">介绍</h2>
+<p><code>matplotlib</code>是一款非常优秀的python绘图工具，大家在使用python仅绘图时，大部分情况下应该都会想到使用该工具进行绘图，但是<code>matplotlib</code>参数众多，画简单的图像可以通过搜索的方式来画出，但是想要画出一张比较复杂的图像，还是有一定门槛的，本文将对matplotlib的绘图做一些介绍说明，希望对大家有所帮助。</p>
+<h2 id="安装">安装</h2>
+<p><code>matplotlib</code>的安装非常简单，直接使用<code>pip</code>工具安装即可。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>pip install matplotlib
+</span></span></code></pre></div><blockquote>
+<p>除了使用<code>pip</code>工具直接安装外，还可以通过<code>conda</code>、<code>源码安装</code>等方式安装<code>matplotlib</code>，关于更多的安装方法，可以参考<a href="https://matplotlib.org/stable/users/installing/index.html">这里</a>。</p></blockquote>
+<h2 id="matplotlib-组件">matplotlib 组件</h2>
+<p>在具体介绍 <code>matplotlib</code> 中各个组件之前，先贴一张官方的介绍图片。</p>
+<p><img data-action="zoom" src="https://littletom.oss-cn-nanjing.aliyuncs.com/anatomy.webp" alt="anatomy"></p>
+<p>这张图片清楚的标识出了一幅图像中的各个组成部分。在 <code>matplotlib</code> 中，一幅图像中最核心的元素主要有两个，分别是 <code>Figure</code> 和 <code>Axes</code>。</p>
+<p><code>matplotlib</code> 图像的所有元素都位于一个 <code>Figure</code> 对象中，可以把它理解一个最大的容器，用于记录图像中所有元素的信息。一个 <code>Figure</code> 中可以包含多个 <code>Axes</code>，每个 <code>Axes</code> 可以理解为一个子图，它记录了一个子图中的所有元素，包含标题（<code>title</code>）、横纵坐标（<code>axis</code>）、坐标刻度（<code>tick</code>）、横纵坐标标签（<code>label</code>）、图像形状（<code>line</code>, <code>scatter</code>  等）、网格（<code>grid</code>）、边框（<code>spine</code>）、图例（<code>legend</code>）等等。使用 <code>matplotlib</code> 绘图的过程可以简单的理解为由两步构成：</p>
+<ol>
+<li>创建 <code>Figure</code> 对象和 <code>Axes</code> 对象；</li>
+<li>使用 <code>Figure</code> 和 <code>Axes</code> 内置的各种方式添加或设置各种元素。</li>
+</ol>
+<p>使用下面的代码可以创建 <code>Figure</code> 和 <code>Axes</code>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#fc5fa3">import</span> matplotlib.pyplot <span style="color:#fc5fa3">as</span> plt
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#fc5fa3">import</span> numpy <span style="color:#fc5fa3">as</span> np
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span><span style="color:#6c7986"># 创建一个 Figure 对象，使用这种方式创建完成后，Figure 中未添加任何 Axes</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>fig = plt.figure()
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span><span style="color:#6c7986"># 创建一个 Figure 对象，使用这种方式创建完成后，Figure 中包含一个 Axes</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>fig, ax = plt.subplots()
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span><span style="color:#6c7986"># 创建一个 Figure 对象，并将其按2行2列的网格结构划分，即包含4个Axes</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>fig, axs = plt.subplots(<span style="color:#d0bf69">2</span>, <span style="color:#d0bf69">2</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span><span style="color:#6c7986"># 创建一个 Figure 对象，并将其按左侧1个 Axes，右侧上下2个 Axes 的结构划分，即包含3个Axes</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>fig, axs = plt.subplot_mosaic([[<span style="color:#fc6a5d">&#39;left&#39;</span>, <span style="color:#fc6a5d">&#39;right_top&#39;</span>],
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span>                               [<span style="color:#fc6a5d">&#39;left&#39;</span>, <span style="color:#fc6a5d">&#39;right_bottom&#39;</span>]])
+</span></span></code></pre></div><h2 id="两种接口风格">两种接口风格</h2>
+<p>在正式了解 <code>matplotlib</code> 如何绘制图像之前，有必要先了解一下 <code>matplotlib</code> 代码的两种风格，这对理解查看 <code>matplotlib</code> 代码非常有帮助。</p>
+<p><code>matplotlib</code>在设计时，给使用人员提供了两种接口风格：</p>
+<ol>
+<li><code>Axes</code> 风格：这是一种<strong>显式</strong>调用 <code>matplotlib</code> 接口的风格，使用该风格，你需要自己控制 <code>Figure</code> 对象和 <code>Axes</code> 对象，并根据自己的需要，在这两个对象上进行操作，是一种标准的“面向对象”实现。</li>
+<li><code>pyplot</code> 风格：这是一种<strong>隐式</strong>调用  <code>matplotlib</code> 接口的风格，是用该风格，你无须自己控制各类对象，<code>matplotlib</code>会自动检测你要操作的对象，并执行操作。</li>
+</ol>
+<blockquote>
+<p>关于这里的 <code>Figure</code> 和 <code>Axes</code> 具体是什么，前面已经介绍过了，这里再简单说明一下。可以把它们两个都理解为储存图像各种元素（如标题、横纵坐标、刻度信息等等）的容器。<code>Figure</code> 是一幅图像中最大的容器，保存一幅图像所需的所有元素；<code>Axes</code> 是一幅子图的最大容器，保存了一幅子图所需的所有元素。对应一个图像中可以包含多个子图，一个 <code>Figure</code> 对象中也可以包含若干个 <code>Axes</code> 对象。</p></blockquote>
+<p>相信大家在搜索各类资料时，可能也会对这两种风格感到困惑，因为有些文章的代码会使用 <code>plt.xxx()</code> ，而有些文章的代码又会使用 <code>ax.xxx</code> ，这其实就是使用了不同的风格，只不过文章中没有提到<strong>两种风格</strong>而已。</p>
+<p>两种风格各有优略势。<code>Axes</code> 风格因为在创建 <code>Figure</code> 和 <code>Axes</code> 对象时提供了句柄给用户，所以可以很方便地操作图像中的各个细节；<code>pyplot</code> 的优势则在于当需要绘制一些非常简单的图像时，会非常的方便，代码会非常简洁。</p>
+<blockquote>
+<p>句柄可以简单的理解为就是一个变量，如 <code>fig, ax = plt.subplots()</code>，这串代码将实例化后的 <code>Figure</code> 对象和 <code>Axes</code> 对象保存在了变量 <code>fig</code> 和 <code>ax</code> 中，我们可以直接通过操作变量实现对图像的操作。</p></blockquote>
+<p>在实际工作中，对于一些非常简单的绘图，如只需要一个折线图、柱状图、饼图等地场景，可以直接使用 <code>pyplot</code> 风格，此时绘制图像的代码会非常简洁。对于一些略微负责的场景，建议使用 <code>Axes</code> 风格，因为它可以手动严格操作图像中的各个小细节，绘图时会更加清晰。倒不是说 <code>pyplot</code> 不能绘制复杂的图像，而是在绘制一些较为复杂的图像时，它可能不如 <code>Axes</code> 那样方便。</p>
+<p>下面通过几个例子来展示一下两种风格的差异。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#6c7986"># Axes风格</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#fc5fa3">import</span> matplotlib.pyplot <span style="color:#fc5fa3">as</span> plt
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>fig = plt.figure()
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>ax = fig.subplots()
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>ax.plot([<span style="color:#d0bf69">1</span>, <span style="color:#d0bf69">2</span>, <span style="color:#d0bf69">3</span>, <span style="color:#d0bf69">4</span>], [<span style="color:#d0bf69">0</span>, <span style="color:#d0bf69">0.5</span>, <span style="color:#d0bf69">1</span>, <span style="color:#d0bf69">0.2</span>])
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#6c7986"># pyplot风格</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#fc5fa3">import</span> matplotlib.pyplot <span style="color:#fc5fa3">as</span> plt
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>plt.plot([<span style="color:#d0bf69">1</span>, <span style="color:#d0bf69">2</span>, <span style="color:#d0bf69">3</span>, <span style="color:#d0bf69">4</span>], [<span style="color:#d0bf69">0</span>, <span style="color:#d0bf69">0.5</span>, <span style="color:#d0bf69">1</span>, <span style="color:#d0bf69">0.2</span>])
+</span></span></code></pre></div><p>以上代码都绘制出下面的图像。<code>pyplot</code> 风格绘制图像的代码只有一行，而 <code>Axes</code> 风格绘制图像的代码却有三行，明显 <code>pyplot</code> 的代码更加简洁。但是 <code>Axes</code> 代码量虽然多一些，但是它却获取到了 <code>Figure</code> 对象和 <code>Axes</code> 对象，并都保存到了句柄中，后续如果需要对图像进行更多的处理，它直接使用 <code>fig</code> 和 <code>ax</code> 即可。</p>
+<p><img data-action="zoom" src="https://littletom.oss-cn-nanjing.aliyuncs.com/api_interfaces-1.png" alt="api_interfaces-1"></p>
+<p>我们再来看一个略微复杂的例子。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#6c7986"># Axes风格</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#fc5fa3">import</span> matplotlib.pyplot <span style="color:#fc5fa3">as</span> plt
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>fig, axs = plt.subplots(<span style="color:#d0bf69">1</span>, <span style="color:#d0bf69">2</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>axs[<span style="color:#d0bf69">0</span>].plot([<span style="color:#d0bf69">1</span>, <span style="color:#d0bf69">2</span>, <span style="color:#d0bf69">3</span>], [<span style="color:#d0bf69">0</span>, <span style="color:#d0bf69">0.5</span>, <span style="color:#d0bf69">0.2</span>])
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>axs[<span style="color:#d0bf69">1</span>].plot([<span style="color:#d0bf69">3</span>, <span style="color:#d0bf69">2</span>, <span style="color:#d0bf69">1</span>], [<span style="color:#d0bf69">0</span>, <span style="color:#d0bf69">0.5</span>, <span style="color:#d0bf69">0.2</span>])
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#6c7986"># pyplot风格</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#fc5fa3">import</span> matplotlib.pyplot <span style="color:#fc5fa3">as</span> plt
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>plt.subplot(<span style="color:#d0bf69">1</span>, <span style="color:#d0bf69">2</span>, <span style="color:#d0bf69">1</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>plt.plot([<span style="color:#d0bf69">1</span>, <span style="color:#d0bf69">2</span>, <span style="color:#d0bf69">3</span>], [<span style="color:#d0bf69">0</span>, <span style="color:#d0bf69">0.5</span>, <span style="color:#d0bf69">0.2</span>])
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>plt.subplot(<span style="color:#d0bf69">1</span>, <span style="color:#d0bf69">2</span>, <span style="color:#d0bf69">2</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span><span>plt.plot([<span style="color:#d0bf69">3</span>, <span style="color:#d0bf69">2</span>, <span style="color:#d0bf69">1</span>], [<span style="color:#d0bf69">0</span>, <span style="color:#d0bf69">0.5</span>, <span style="color:#d0bf69">0.2</span>])
+</span></span></code></pre></div><p>上面两段代码，其实都是在绘制下面的图像。与上一个例子不同，这例子中 <code>Axes</code> 风格的代码更简洁，这是因为这种风格可以直接获取到两个子图的句柄，而 <code>pyplot</code> 则需要通过 <code>plt.subplot</code> 命令来切换操作对象。</p>
+<p><img data-action="zoom" src="https://littletom.oss-cn-nanjing.aliyuncs.com/api_interfaces-3.png" alt="api_interfaces-3"></p>
+<p>下面是一个更复杂的例子，更能体现出 <code>Axes</code> 风格的优势。</p>
+<p>假设现在我们需要对上面的图像加上一个标题，并给每个子图加上横坐标标签，则两种风格绘制图像的代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#6c7986"># Axes风格</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span><span style="color:#fc5fa3">import</span> matplotlib.pyplot <span style="color:#fc5fa3">as</span> plt
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span>fig, axs = plt.subplots(<span style="color:#d0bf69">1</span>, <span style="color:#d0bf69">2</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span>axs[<span style="color:#d0bf69">0</span>].plot([<span style="color:#d0bf69">1</span>, <span style="color:#d0bf69">2</span>, <span style="color:#d0bf69">3</span>], [<span style="color:#d0bf69">0</span>, <span style="color:#d0bf69">0.5</span>, <span style="color:#d0bf69">0.2</span>])
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span>axs[<span style="color:#d0bf69">1</span>].plot([<span style="color:#d0bf69">3</span>, <span style="color:#d0bf69">2</span>, <span style="color:#d0bf69">1</span>], [<span style="color:#d0bf69">0</span>, <span style="color:#d0bf69">0.5</span>, <span style="color:#d0bf69">0.2</span>])
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span>fig.suptitle(<span style="color:#fc6a5d">&#39;Explicit Interface&#39;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span><span><span style="color:#fc5fa3">for</span> i in <span style="color:#d0a8ff">range</span>(<span style="color:#d0bf69">2</span>):
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9</span><span>    axs[i].set_xlabel(<span style="color:#fc6a5d">&#39;Boo&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span><span style="color:#6c7986"># pyplot风格</span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span><span style="color:#fc5fa3">import</span> matplotlib.pyplot <span style="color:#fc5fa3">as</span> plt
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span>plt.subplot(<span style="color:#d0bf69">1</span>, <span style="color:#d0bf69">2</span>, <span style="color:#d0bf69">1</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span>plt.plot([<span style="color:#d0bf69">1</span>, <span style="color:#d0bf69">2</span>, <span style="color:#d0bf69">3</span>], [<span style="color:#d0bf69">0</span>, <span style="color:#d0bf69">0.5</span>, <span style="color:#d0bf69">0.2</span>])
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span>plt.subplot(<span style="color:#d0bf69">1</span>, <span style="color:#d0bf69">2</span>, <span style="color:#d0bf69">2</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span>plt.plot([<span style="color:#d0bf69">3</span>, <span style="color:#d0bf69">2</span>, <span style="color:#d0bf69">1</span>], [<span style="color:#d0bf69">0</span>, <span style="color:#d0bf69">0.5</span>, <span style="color:#d0bf69">0.2</span>])
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span>plt.suptitle(<span style="color:#fc6a5d">&#39;Implicit Interface: re-call subplot&#39;</span>)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span>
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span><span style="color:#fc5fa3">for</span> i in <span style="color:#d0a8ff">range</span>(<span style="color:#d0bf69">1</span>, <span style="color:#d0bf69">3</span>):
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span>    plt.subplot(<span style="color:#d0bf69">1</span>, <span style="color:#d0bf69">2</span>, i)
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span><span>    plt.xlabel(<span style="color:#fc6a5d">&#39;Boo&#39;</span>)
+</span></span></code></pre></div><p>可以看出，因为需要来回切换操作对象，<code>pyplot</code> 风格的代码变得越来越臃肿。<code>Axes</code> 风格在创建对象时就保存了句柄信息，因此即使后续要添加新的细节，仍然只需要在指定对象上操作即可。</p>
+<p><img data-action="zoom" src="https://littletom.oss-cn-nanjing.aliyuncs.com/api_interfaces-8.png" alt="api_interfaces-8"></p>
+<p>对比上面三个例子，建议在实际使用时，尽量使用 <code>Axes</code> 风格（面向对象风格），这也是 <code>matplotlib</code> 官方所建议的。</p>
+<blockquote>
+<p>需要注意的一点是，虽然建议在实际使用时使用 <code>Axes</code> 风格，但是它也需要先使用 <code>plt.figure</code> 或 <code>plt.subplots</code> 的形式先创建 <code>Figure</code> 对象和 <code>Axes</code> 对象。</p></blockquote>
+<h2 id="使用-matplotlib-绘图">使用 matplotlib 绘图</h2>
+<p>熟悉了前面的基本概念，下面开始正式介绍使用 <code>matplotlib</code> 的绘图方法。</p>
+<p>根据我的使用经验，自己整理了一套绘图流程，下面将按照这套绘图流程介绍 <code>matplotlib</code> 的绘图方法。这里将按照下面的顺序，由易到难展开介绍：</p>
+<ol>
+<li>单子图、单组数据的场景；</li>
+<li>单子图、多组数据的场景；</li>
+<li>多子图场景。</li>
+</ol>
+<blockquote>
+<p>这里的<strong>单子图</strong>，顾名思义是指一幅图像中仅包含一个子图。</p>
+<p><strong>单组数据</strong>是指图像中只绘制一组数据序列，形成一个图像，如只包含一条折线的折线图、只包含一组柱的柱状图等。
+对应的，<strong>多组数据</strong>则是值包含多组数据序列，具体图像如：多条折线的折线图、并列柱状图、同时包含折线和柱的组合图像等。</p></blockquote>
+<h3 id="单子图单组数据场景">单子图、单组数据场景</h3>
+<p>单子图、单组数据的场景是一种比较简单的场景，但可以帮助我们梳理清楚一幅图像中要包含哪些元素。这也是绘制多图的基础。具体地，在绘制一幅单子图时，我们可以按照下面地顺序去设计图像和编写代码：</p>
+<ol>
+<li>
+<p>根据数据结构，确定数据的展示形式。
+确定数据展示形式是说，不同的数据对应的最优展示图形是不一样的。一个简单的选择图像原则是：</p>
+<ul>
+<li>如果要展示数据的趋势或变化，可以使用<strong>线图</strong>。线图能清晰显示数据随时间的变化。</li>
+<li>如果要比较不同类别的数据值，可以使用<strong>柱形图</strong>。柱形图通过长度高低直观对比不同类别的数据。</li>
+<li>如果要展示不同分类的数据组成或占比情况，可以使用<strong>饼图</strong>。饼图能一目了然地看出各分类的数据比例。</li>
+<li>如果要比较多组数据之间的关系，可以使用<strong>散点图</strong>。散点图通过点的分布看出数据之间的相关性。</li>
+<li>如果数据包含多个维度，可以使用<strong>雷达图</strong>。雷达图能同时比较多个指标的数据情况。</li>
+<li>如果要突出展示极大或极小值，可以使用<strong>箱线图</strong>。箱线图能标识出异常数据点。</li>
+</ul>
+</li>
+<li>
+<p>创建画布和 <code>Axes</code>；</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span><span style="color:#fc5fa3">import</span> matplotlib.pyplot <span style="color:#fc5fa3">as</span> plt
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>fig = plt.figure()
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>ax = fig.subplots()
+</span></span></code></pre></div></li>
+<li>
+<p>根据选择地图像类型，整理数据，并绘制对应的形状。</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>x = [<span style="color:#d0bf69">1</span>,<span style="color:#d0bf69">2</span>,<span style="color:#d0bf69">3</span>,<span style="color:#d0bf69">4</span>]
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span>y = [<span style="color:#d0bf69">0</span>, <span style="color:#d0bf69">0.5</span>, <span style="color:#d0bf69">1</span>, <span style="color:#d0bf69">0.2</span>]
+</span></span><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span>ax.plot(x, y)  <span style="color:#6c7986"># 绘制折线图</span>
+</span></span></code></pre></div><p>各种形状对应的方法如下：</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">方法</th>
+          <th style="text-align: center">形状</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center"><code>plot</code></td>
+          <td style="text-align: center">线图</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>scatter</code></td>
+          <td style="text-align: center">散点图</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>bar</code></td>
+          <td style="text-align: center">柱状图</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>hist</code></td>
+          <td style="text-align: center">直方图</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>boxplot</code></td>
+          <td style="text-align: center">箱线图</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>pie</code></td>
+          <td style="text-align: center">饼图</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>violinplot</code></td>
+          <td style="text-align: center">小提琴图</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>fill_between</code></td>
+          <td style="text-align: center">置信度曲线图</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>stackplot</code></td>
+          <td style="text-align: center">堆积图</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>step</code></td>
+          <td style="text-align: center">跃迁图</td>
+      </tr>
+  </tbody>
+</table>
+<p>更多的形状绘制方法以及各个方法详细的参数信息可以参考<a href="https://matplotlib.org/stable/plot_types/">这里</a>。</p>
+</li>
+<li>
+<p>设置标题；</p>
+<div class="highlight"><pre tabindex="0" style="color:#fff;background-color:#1f1f24;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span>ax.set_title(<span style="color:#fc6a5d">&#39;标题&#39;</span>)
+</span></span></code></pre></div></li>
+<li>
+<p>设置坐标轴；
+坐标轴设置包含许多内容，可以先将坐标轴分为两部分：横坐标和纵坐标。横纵坐标包含的内容时相同的，这里为了介绍方便，只介绍横坐标需要设置的内容，纵坐标的设置是类似的。</p>
+<p>横坐标需要设置的内容包括：</p>
+<ul>
+<li><code>label</code>: 坐标轴说明</li>
+<li><code>major tick</code>: 主坐标轴</li>
+<li><code>minor tick</code>: 次坐标轴</li>
+</ul>
+</li>
+<li>
+<p>设置网格线。</p>
+</li>
+</ol>
+
+                </div>
+
+                <div class="row middle-xs">
+                    <div class="col-xs-12">
+                        
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-xs-12">
+                        
+                    </div>
+                </div>
+
+                
+
+
+
+                
+                
+                <div style="height: 50px;"></div>
+                
+                
+
+                <div class="site-footer">
+  
+  
+</div>
+
+            </div>
+        </div>
+    </article>
+
+    
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/zoom.min.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+<script>
+  
+  
+    
+    
+  
+</script>
+
+    
+
+</body>
+
+</html>
