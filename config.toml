@@ -6,6 +6,7 @@ DefaultContentLanguage = "cn"
 enableRobotsTXT = true
 canonifyURLs = false
 enableEmoji = true
+publishDir = "docs"
 
 googleAnalytics = "G-BB1PN11EPH"
 
