@@ -1,0 +1,12 @@
+/* Font faces are served locally via layouts/_partials/extend_head.html. */
+body {
+    font-family: "LXGW WenKai", sans-serif;
+}
+
+/* Keep technical examples in a monospace font, including inline code. */
+code,
+pre,
+kbd,
+samp {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}

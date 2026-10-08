@@ -1,0 +1,7 @@
+{{- /* Local webfonts: relative CSS URLs preserve subdirectory deployments. */ -}}
+<link rel="stylesheet" href="{{ "fonts/lxgw-wenkai/lxgwwenkai-regular.css" | relURL }}">
+<link rel="stylesheet" href="{{ "fonts/lxgw-wenkai/lxgwwenkai-bold.css" | relURL }}">
+
+{{- if or .Params.math .Site.Params.math }}
+{{- partial "math.html" . }}
+{{- end }}

@@ -1,0 +1,117 @@
+baseURL: "http://127.0.0.1:1313/"
+locale: "zh-cn"
+languageCode: "zh-cn"
+defaultContentLanguage: "zh-cn"
+title: "lidongchao's blog"
+
+theme: ["PaperMod"]
+
+# 基础设置
+hasCJKLanguage: true
+enableEmoji: true
+enableRobotsTXT: true
+
+# 每页文章数量
+pagination:
+  pagerSize: 10
+
+# 构建设置
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+# Markdown 渲染
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+  highlight:
+    codeFences: true
+    guessSyntax: true
+    lineNos: true
+    lineNumbersInTable: true
+    noClasses: false
+
+  tableOfContents:
+    startLevel: 2
+    endLevel: 4
+    ordered: false
+
+# 搜索功能需要输出 JSON
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+params:
+  env: production
+
+  # 网站介绍
+  description: "lidongchao 的个人技术博客"
+  author: "lidongchao"
+
+  # 默认主题：auto / light / dark
+  defaultTheme: auto
+
+  # 主题切换按钮
+  disableThemeToggle: false
+
+  # 显示阅读时间、字数等
+  ShowReadingTime: true
+  ShowWordCount: true
+  ShowDate: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+
+  # 文章目录
+  ShowToc: true
+  TocOpen: false
+
+  # 首页隐藏完整文章内容
+  hideSummary: false
+
+  # 数学公式
+  math: true
+
+  # 首页个人介绍
+  homeInfoParams:
+    Title: "你好，欢迎来到我的博客 👋"
+    Content: "记录技术学习、开发实践与生活思考。"
+
+  # 社交链接
+  socialIcons:
+    - name: github
+      url: "https://github.com/li-dong-chao"
+
+  # 搜索配置
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    threshold: 0.4
+    minMatchCharLength: 2
+    keys:
+      - title
+      - permalink
+      - summary
+      - content
+
+# 顶部导航
+menus:
+  main:
+    - identifier: home
+      name: 首页
+      url: /
+      weight: 10
+
+    - identifier: categories
+      name: 分类
+      url: /categories/
+      weight: 30
+
+    - identifier: tags
+      name: 标签
+      url: /tags/
+      weight: 40
